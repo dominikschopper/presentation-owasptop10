@@ -1,0 +1,88 @@
+body {
+	overflow-x: hidden;
+}
+.step.slide.title.active {	
+	margin: 0 auto;
+}
+.step:not(.active) {
+	opacity: 0.1;
+}
+.step.active {
+	background-image: url(../../../RESTexplained/img/green-talking.png);
+	background-repeat: no-repeat;
+    background-position: left;
+    background-size: auto 100%;
+    width:1024px;
+}
+.step.active:nth-of-type(2n+2){
+	background-image: url(../../../RESTexplained/img/red-talking.png);
+	background-position: right;	
+}
+
+.step>blockquote:before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	
+	left: -50px;      
+        
+	top: 50px;
+	border: 25px solid;
+	border-color: transparent green green transparent;
+}
+.step:nth-of-type(2n+2)>blockquote:before {
+	right:-52px;
+	left:auto;	
+	border-color: red transparent transparent red;
+}
+.step>blockquote:after {
+	content: '';
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	left: -46px;
+    top: 52px;
+        
+    border: 23px solid;
+    border-color: transparent whitesmoke whitesmoke transparent;
+}
+.step:nth-of-type(2n+2)>blockquote:after {
+	left:auto;
+	right: -42px;
+	border-color:  whitesmoke transparent  transparent whitesmoke;
+}
+
+.step>blockquote {
+
+	margin-left: 300px;
+	text-align: left;
+	position: relative;
+
+	padding: 20px 50px 20px 50px;
+	
+	background-color: whitesmoke;
+        
+	border: 3px solid green;	 
+	border-radius: 30px;
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;	
+	box-shadow: 2px 2px 4px #888;
+            -webkit-box-shadow: 2px 2px 4px #888;
+            -moz-box-shadow: 2px 2px 4px #888;
+
+    font-family: cursive;
+    font-size: 26px;
+}
+
+.step.active>blockquote {
+	text-shadow: 3px 3px 5px white;
+}
+.step:nth-of-type(2n+2)>blockquote {
+	margin-right: 300px;
+	margin-left: 0px;
+	border: 3px solid red;	 
+}
+.step.slide, #final {
+	background-image: none;
+}
