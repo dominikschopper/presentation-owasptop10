@@ -49,7 +49,7 @@ body{
 }
 
 #break .modal-content {
-background-image: url(./img/break-switching.png);
+background-image: url("../img/break-switching.png");
 display: block;
 min-height: 180px;
 min-width: 400px;
@@ -93,7 +93,7 @@ min-width: 400px;
 
 
 #final:before {
-    content: url(./img/bisnode-final.png);
+    content: url(../img/bisnode-final.png);
 }
 
 .slide.title header{
@@ -101,7 +101,7 @@ min-width: 400px;
     margin-left: -60px;
     margin-right: -60px;
 
-/*    background: url(./img/bisnode-title.png);
+/*    background: url(../img/bisnode-title.png);
     background-origin: border-box;
     background-repeat: no-repeat;
     background-position: left;
@@ -192,7 +192,7 @@ min-width: 400px;
     background-position-x: 90%;
     background-position-y: 50%;
 
-/*    background:   url(./img/bisnode-logo-black.png), url(./img/bisnode-divider-lightgreen.png);
+/*    background:   url(../img/bisnode-logo-black.png), url(../img/bisnode-divider-lightgreen.png);
     background-repeat: no-repeat;
     background-position: 850px top, 10px 45px;
     background-origin: border-box;
@@ -251,7 +251,7 @@ min-width: 400px;
     margin-left: -10%;
     display: inline-block;
 
-    background-image: url(./img/divider-sprites.png);
+    background-image: url(../img/divider-sprites.png);
     background-position: 0 0px;
 }
 .slide.chapter.lightgreen header {
@@ -401,7 +401,7 @@ blockquote.none:before {
     height: 85px;
     width: 1105px;
 
-    background: url(./img/bisnode-logo.png);
+    background: url(../img/bisnode-logo.png);
     background-repeat: no-repeat;
     background-position: 850px top;
     background-origin: border-box;
@@ -426,7 +426,7 @@ blockquote.none:before {
     white-space: pre;
 }
 .image footer.black {
-    background: url(./img/bisnode-logo-black.png);
+    background: url(../img/bisnode-logo-black.png);
     background-repeat: no-repeat;
     background-position: 850px top;
     background-origin: border-box;
@@ -560,7 +560,7 @@ table { font-size: 24px; }
 
 .step.under-construction::after {
   content: "";
-  background: url(./img/under-construction.png);
+  background: url(../img/under-construction.png);
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -573,10 +573,10 @@ table { font-size: 24px; }
 .step.assignment {
     border-style: solid;
     border-width: 30px 86px 35px 91px;
-    -moz-border-image: url(./img/code-paper.png) 30 86 35 91 repeat;
-    -webkit-border-image: url(./img/code-paper.png) 30 86 35 91 repeat;
-    -o-border-image: url(./img/code-paper.png) 30 86 35 91 repeat;
-    border-image: url(./img/code-paper.png) 30 86 35 91 fill repeat;
+    -moz-border-image: url(../img/code-paper.png) 30 86 35 91 repeat;
+    -webkit-border-image: url(../img/code-paper.png) 30 86 35 91 repeat;
+    -o-border-image: url(../img/code-paper.png) 30 86 35 91 repeat;
+    border-image: url(../img/code-paper.png) 30 86 35 91 fill repeat;
 }
 
 /* ======= new Bisnode design ===== */
