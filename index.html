@@ -156,9 +156,16 @@
             font-weight: bold;
             padding: 0 1em;
         }
-
+        .slide .text--red {
+            color: #EE3333;
+        }
+        
+        .slide .text--bold {
+            font-weight: bold;
+        }
         .slide ol>li,
         .slide ul>li {
+            list-style-type: square;
             margin-top: 0.5em;
             margin-bottom: 0.75em;
         }
@@ -175,6 +182,11 @@
             margin: 0 0 0 3%;
             float: left;
             line-height: 1.4em
+        }
+
+        .header--bold {
+            font-weight: bold;
+            font-size: 3.2rem;
         }
 
     </style>
@@ -255,9 +267,6 @@
                     <li>
                         <a href="#/page-wrapup">Finishing Line</a>
                     </li>
-
-
-
 
 
                     <li class="divider" style="width:15%"></li>
@@ -536,23 +545,23 @@ if (array_key_exists($goto, $redirectMap)) {
             <p></p>
             <ul type="square">
                 <li>Using a framework ... 
-                    <span data-jmpress="fade">and not updating it</span>
+                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
                 </li>
 
                 <li >Using a library ... 
-                    <span >and not updating it</span>
+                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
                 </li>
 
                 <li >Using a programm ... 
-                    <span >and not updating it</span>
+                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
                 </li>
 
                 <li >Using a database ... 
-                    <span >and not updating it</span>
+                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
                 </li>
 
-                <li >Using an ... 
-                    <span >and not updating it</span>
+                <li >Using anything you did not code yourself ...
+                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
                 </li>
             </ul>
             <footer></footer>
@@ -646,28 +655,53 @@ if (array_key_exists($goto, $redirectMap)) {
     </div>
 
 
-        <div id="page-7-0" class="title step slide" data-x="-4000" data-y="0" data-z="0" data-rotate-y="330">
+        <div id="page-7-0" class="title step slide" data-x="-4000" data-y="0" data-z="-2000" data-rotate-y="330">
             <header>
-                <h3>Missing function level access control?</h3>
+                <h3>
+                    Missing function level access control?<br/>
+                    and<br/>
+                    Insecure direct Object References?
+                </h3>
             </header>
             
             <footer></footer>
         </div>
 
-        <div id="page-7-1" class="step slide" data-x="-4000" data-y="0" data-z="1500" data-rotate-y="330">
+        <div id="page-7-1" class="step slide" data-x="-4000" data-y="-2500" data-z="-2000" data-rotate-y="330">
             <header>
-                <h3>Missing function level access control?</h3>
+                <h3>Explanation</h3>
             </header>
-            <p>Applications do not always protect application functions properly.
-                 What should be available to an admin and not to a normal user is just hidden and not properly checked
-                if it as called by an admin</p>
+            
+            <h2 class="header--bold">Missing function level access control?</h2>
+            <p>
+                Applications often <b>do not</b> protect application functions.<br/>
+                What should be available to an admin and not to a normal user is just hidden and not properly checked
+                if it as called by an admin. See <a href="http://localhost:3000/" target="_blank">OWASP Juice Shop</a>
+            </p>
+
+            <h2 class="header--bold">Insecure direct Object References</h2>
+            <p>
+                Database IDs and other identifiers are used within the application without any further 
+                checks or abstraction
+            </p>
 
             <p>E.g. Show the admin overview as normal customer ...</p>
 
             <footer></footer>
         </div>
 
-        <div id="page-7-2" class="step slide" data-x="-4000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-7-2" class="step slide" data-x="-4000" data-y="-5000" data-z="-2000" data-rotate-y="330">
+            <header>
+                <h3>Missing function level access control?</h3>
+            </header>
+            <div>
+                ...
+            </div>
+            <footer></footer>
+        </div>
+
+
+        <div id="page-7-3" class="step slide" data-x="-4000" data-y="-7500" data-z="-2000" data-rotate-y="330">
             <header>
                 <h3>Missing function level access control?</h3>
             </header>
@@ -679,14 +713,14 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-6-0" class="title step slide" data-x="-2000" data-y="0" data-z="0" data-rotate-y="360">
+        <div id="page-6-0" class="title step slide" data-x="-2000" data-y="0" data-z="-4000" data-rotate-y="0">
             <header>
                 <h3>Sensitive Data Exposure?</h3>
             </header>
             <footer></footer>
         </div>
 
-        <div id="page-6-1" class="step slide" data-x="-2000" data-y="0" data-z="1500" data-rotate-y="360">
+        <div id="page-6-1" class="step slide" data-x="-2000" data-y="2500" data-z="-4000" data-rotate-y="0">
             <header>
                 <h3>What is Sensitive Data Exposure?</h3>
                 <p>What kind of data do we speak here?</p>
@@ -702,7 +736,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-6-2" class="step slide" data-x="-2000" data-y="0" data-z="3000" data-rotate-y="360">
+        <div id="page-6-2" class="step slide" data-x="-2000" data-y="5000" data-z="-4000" data-rotate-y="0">
             <header>
                 <h3>Sensitive Data Exposure?</h3>
                 <p>How to prevent that?</p>
@@ -719,7 +753,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-6-3" class="step slide" data-x="-2000" data-y="0" data-z="4500" data-rotate-y="0">
+        <div id="page-6-3" class="step slide" data-x="-2000" data-y="7500" data-z="-4000" data-rotate-y="0">
             <header>
                 <h3>Sensitive Data Exposure?</h3>
             </header>
@@ -733,7 +767,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-5-0" class="title step slide" data-x="0" data-y="0" data-z="0" data-rotate-y="0">
+        <div id="page-5-0" class="title step slide" data-x="0" data-y="0" data-z="-6000" data-rotate-y="-30">
             <header>
                 <h3>Security Misconfiguration</h3>
             </header>
@@ -741,7 +775,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-5-1" class="step slide" data-x="0" data-y="0" data-z="1500" data-rotate-y="0">
+        <div id="page-5-1" class="step slide" data-x="0" data-y="2500" data-z="-6000" data-rotate-y="-30">
             <header>
                 <h3>Security Misconfiguration?</h3>
             </header>
@@ -773,7 +807,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-5-2" class="step slide" data-x="0" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-5-2" class="step slide" data-x="0" data-y="5000" data-z="-6000" data-rotate-y="-30">
             <header>
                 <h3>Security Misconfiguration?</h3>
             </header>
@@ -793,7 +827,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-5-3" class="step slide" data-x="0" data-y="0" data-z="4500" data-rotate-y="330">
+        <div id="page-5-3" class="step slide" data-x="0" data-y="75000" data-z="-6000" data-rotate-y="-30">
             <header>
                 <h3>Security Misconfiguration - what can be done?</h3>
             </header>
@@ -811,25 +845,12 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-4-0" class="title step slide" data-x="2000" data-y="0" data-z="0" data-rotate-y="330">
+        <!-- <div id="page-4-0" class="title step slide" data-x="2000" data-y="0" data-z="0" data-rotate-y="330">
             <header>
                 <h3>Insecure direct Object References?</h3>
             </header>
 
             <p>what object???</p>
-
-            <footer></footer>
-        </div>
-
-        <div id="page-4-1" class="step slide" data-x="2000" data-y="0" data-z="1500" data-rotate-y="330">
-            <header>
-                <h3>Insecure direct Object References?</h3>
-            </header>
-           
-            <p>
-                Database IDs and other identifiers are used within the application without any further 
-                checks or abstraction
-            </p>
 
             <footer></footer>
         </div>
@@ -862,9 +883,9 @@ if (array_key_exists($goto, $redirectMap)) {
                 <li>prefetch valid ids and check against these</li>
             </ul>
             <footer></footer>
-        </div>
+        </div> -->
 
-        <div id="page-3-0" class="title step slide" data-x="4000" data-y="0" data-z="0" data-rotate-y="330">
+        <div id="page-3-0" class="title step slide" data-x="2000" data-y="0" data-z="-9000" data-rotate-y="-60">
 
             <iframe style="margin-top: 0;margin-right: -35px;float: right;" width="672" height="378" src="https://www.youtube.com/embed/qLDCI0PVbsg" frameborder="0" allowfullscreen></iframe>                    
 
@@ -875,7 +896,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-3-1" class="step slide" data-x="4000" data-y="0" data-z="1500" data-rotate-y="330">
+        <div id="page-3-1" class="step slide" data-x="2000" data-y="-2500" data-z="-9000" data-rotate-y="-60">
             <header>
                 <h3>Cross site scripting? XSS</h3>
             </header>
@@ -894,7 +915,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-3-2" class="step slide" data-x="4000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-3-2" class="step slide" data-x="2000" data-y="-5000" data-z="-9000" data-rotate-y="-60">
             <header>
                 <h3>Cross site scripting?</h3>
             </header>
@@ -911,7 +932,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-3-3" class="step slide" data-x="4000" data-y="0" data-z="4500" data-rotate-y="330">
+        <div id="page-3-3" class="step slide" data-x="2000" data-y="0" data-z="-9000" data-rotate-y="-60">
             <header>
                 <h3>Cross site scripting? Links</h3>
             </header>
@@ -942,7 +963,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-2-0" class="title step slide" data-x="9000" data-y="0" data-z="0" data-rotate-y="330">
+        <div id="page-2-0" class="title step slide" data-x="4000" data-y="0" data-z="-10500" data-rotate-y="-90">
             <header>
                 <h3>Broken Authentication &amp; Session Management</h3>
             </header>
@@ -950,7 +971,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-2-1" class="step slide" data-x="9000" data-y="0" data-z="1500" data-rotate-y="330">
+        <div id="page-2-1" class="step slide" data-x="4000" data-y="2500" data-z="-10500" data-rotate-y="-90">
             <header>
                 <h3>Broken Authentication &amp; Session Management</h3>
             </header>
@@ -981,7 +1002,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-2-2" class="step slide" data-x="9000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-2-2" class="step slide" data-x="4000" data-y="5000" data-z="-10500" data-rotate-y="-90">
             <header>
                 <h3>Broken Authentication &amp; Session Management</h3>
             </header>
@@ -1001,7 +1022,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-1-0" class="title step slide" data-x="-4000" data-y="0" data-z="0" data-rotate-y="330">
+        <div id="page-1-0" class="title step slide" data-x="9000" data-y="0" data-z="-9000" data-rotate-y="-120">
             
             <div style="float:right">
                 <img src="img/exploits_of_a_mom.png" height="280" alt="little bobby tables">
@@ -1014,7 +1035,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-1-1" class="step slide" data-x="-4000" data-y="0" data-z="1500" data-rotate-y="330">
+        <div id="page-1-1" class="step slide" data-x="9000" data-y="-2500" data-z="-9000" data-rotate-y="-120">
             <header>
                 <h3>Injection</h3>
             </header>
@@ -1041,7 +1062,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-1-2" class="step slide" data-x="-4000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-1-2" class="step slide" data-x="9000" data-y="-5000" data-z="-9000" data-rotate-y="-120">
             <header>
                 <h3>Injection</h3>
             </header>
@@ -1055,19 +1076,42 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <div id="page-wrapup" class="title step slide" data-x="-4000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-1-3" class="step slide" data-x="9000" data-y="-7500" data-z="-9000" data-rotate-y="-120">
+            <header>
+                <h3>Injection</h3>
+            </header>
+            <div>
+                <h3 class="header--bold">Nice to knows</h3>
+                <ul>
+                    <li>
+                        <a href="http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/">SQL Injection Hall of Fame</a>
+                    </li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <footer></footer>
+        </div>
+
+        <div id="page-wrapup" class="title step slide" data-x="10500" data-y="0" data-z="-4000" data-rotate-y="-150">
             <header>
                 <h2>Wrapup -<br/>what now?</h2>
             </header>
+            <div>
+                <h3 class="header--bold">What to take away from this</h3>
+
+                <p>Dont post naked photos of yourself on the internet?</p>
+            </div>
+            <footer></footer>
         </div>
         
-        <div id="page-wrapup-1" class="step slide" data-x="-4000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-wrapup-1" class="step slide" data-x="10500" data-y="2500" data-z="-4000" data-rotate-y="-150">
             <header>
                 <h3>What to do</h3>
             </header>
         </div>
 
-        <div id="page-wrapup-2" class="step slide" data-x="-4000" data-y="0" data-z="3000" data-rotate-y="330">
+        <div id="page-wrapup-2" class="step slide" data-x="10500" data-y="5000" data-z="-4000" data-rotate-y="-150">
             <header>
                 <h3>What is already in place?</h3>
             </header>
@@ -1086,7 +1130,10 @@ if (array_key_exists($goto, $redirectMap)) {
                     prepared right now, automattic scanning in Bamboo/Jenkins
                 </li>
                 <li>
-                    ...
+                    use Dependency Security Checkers (NSP, ...)
+                </li>
+                <li>
+                    discuss with others (architects, developers, ...) before you implement
                 </li>
             </ul>
         </div>
@@ -1128,7 +1175,8 @@ if (array_key_exists($goto, $redirectMap)) {
 
             <footer></footer>
         </div -->
-        <div id="final" class="step slide" data-x="0" data-y="0" data-z="-5000" data-rotate-y="180">
+
+        <div id="final" class="step slide" data-x="0" data-y="20000" data-z="9999" data-rotate-y="0">
             <header>
                 <h1></h1>
             </header>

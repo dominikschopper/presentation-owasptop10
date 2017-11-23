@@ -2606,7 +2606,7 @@
 	/* DEFAULTS */
 	$jmpress("defaults").presentationMode = {
 		use: true,
-		url: "presentation-screen.html",
+		url: "index.html",
 		notesUrl: false,
 		transferredValues: ["userZoom", "userTranslateX", "userTranslateY"]
 	};
