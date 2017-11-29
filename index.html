@@ -669,7 +669,7 @@ if (array_key_exists($goto, $redirectMap)) {
 
         <div id="page-7-1" class="step slide" data-x="-4000" data-y="-2500" data-z="-2000" data-rotate-y="330">
             <header>
-                <h3>Explanation</h3>
+                <h3>Explanation: missing function level access control</h3>
             </header>
             
             <h2 class="header--bold">Missing function level access control?</h2>
@@ -695,7 +695,11 @@ if (array_key_exists($goto, $redirectMap)) {
                 <h3>Missing function level access control?</h3>
             </header>
             <div>
-                ...
+                <ul>
+                    <li>always check on that (lots of frameworks help you with that)</li>
+                    <li>use aspect oriented feature if your language supports that</li>
+                    <li>try to leave as few things as possible to the developer (do stuff "behind the scenes")</li>
+                </ul>
             </div>
             <footer></footer>
         </div>
@@ -709,9 +713,23 @@ if (array_key_exists($goto, $redirectMap)) {
                 <li>Authorization must be checked at each call</li>
                 <li>Languages that support this: use Aspect oriented weaving to implement this</li>
                 <li>use an Express Middleware to explicitly check for this</li>
+                <li>use a Perl Module automatically called by Apache to check for that</li>
             </ul>
             <footer></footer>
         </div>
+
+        <div id="page-7-4" class="step slide" data-x="-4000" data-y="-10000" data-z="-2000" data-rotate-y="330">
+                <header>
+                    <h3>Insecure direct Object References?</h3>
+                    <p>What can be done?</p>
+                </header>
+                <ul type="square">
+                    <li>Use session based ids, that are only valid within the session (mapping back and forth)</li>
+                    <li>check for access rights any time you fetch data (extra SQL)</li>
+                    <li>prefetch valid ids and check against these</li>
+                </ul>
+                <footer></footer>
+            </div>
 
         <div id="page-6-0" class="title step slide" data-x="-2000" data-y="0" data-z="-4000" data-rotate-y="0">
             <header>
@@ -771,7 +789,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <header>
                 <h3>Security Misconfiguration</h3>
             </header>
-
+            <div style="position:absolute;top:1rem;right:1rem;"><img src="img/wylie_ski.jpg" alt=""></div>
             <footer></footer>
         </div>
 
@@ -845,45 +863,7 @@ if (array_key_exists($goto, $redirectMap)) {
             <footer></footer>
         </div>
 
-        <!-- <div id="page-4-0" class="title step slide" data-x="2000" data-y="0" data-z="0" data-rotate-y="330">
-            <header>
-                <h3>Insecure direct Object References?</h3>
-            </header>
-
-            <p>what object???</p>
-
-            <footer></footer>
-        </div>
-
-        <div id="page-4-2" class="step slide" data-x="2000" data-y="0" data-z="3000" data-rotate-y="330">
-            <header>
-                <h3>Insecure direct Object References? An example</h3>
-            </header>
-            <ul type="square">
-                <li>
-                    Referencing Object IDs in the URl or in the application e.g.<br />
-                    <code>https://insights.bisnode.de/order-summary/<span style="color:red">161</span></code>
-                </li>
-                <li>
-                    Often the 161 from above is an id from the DB, you can just guess other values and 
-                    try those
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-4-3" class="step slide" data-x="2000" data-y="0" data-z="4500" data-rotate-y="330">
-            <header>
-                <h3>Insecure direct Object References?</h3>
-                <p>What can be done?</p>
-            </header>
-            <ul type="square">
-                <li>Use session based ids, that are only valid within the session (mapping back and forth)</li>
-                <li>check for access rights any time you fetch data (extra SQL)</li>
-                <li>prefetch valid ids and check against these</li>
-            </ul>
-            <footer></footer>
-        </div> -->
+        
 
         <div id="page-3-0" class="title step slide" data-x="2000" data-y="0" data-z="-9000" data-rotate-y="-60">
 
@@ -1013,7 +993,7 @@ if (array_key_exists($goto, $redirectMap)) {
 
                 <li>secure cookies</li>
 
-                <li>http only</li>
+                <li>https only</li>
 
                 <li>CSRF</li>
 
@@ -1066,13 +1046,20 @@ if (array_key_exists($goto, $redirectMap)) {
             <header>
                 <h3>Injection</h3>
             </header>
-            <h3>What to do</h3>
+            <h3 class="header--bold">What to do</h3>
             <ul type="square">
                 <li>Always filter inputs</li>
                 <li>Think what kind of escaping is needed</li>
                 <li>Wherever possible: work with whitelists, not blacklists</li>
                 <li>Check any external ressource (Example DNS website, Facebook games, MP3 Players ...)</li>
             </ul>
+            <h4 class="header--bold">Nice to knows</h4>
+            <ul>
+                <li>
+                    <a href="http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/">SQL Injection Hall of Shame</a>
+                </li>
+            </ul>
+
             <footer></footer>
         </div>
 
@@ -1081,26 +1068,25 @@ if (array_key_exists($goto, $redirectMap)) {
                 <h3>Injection</h3>
             </header>
             <div>
-                <h3 class="header--bold">Nice to knows</h3>
-                <ul>
-                    <li>
-                        <a href="http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/">SQL Injection Hall of Fame</a>
-                    </li>
-                    <li></li>
-                    <li></li>
+                    <li>Filter all inputs</li>
+                    <li>Use whitelists instead of blacklists</li>
+                    <li>Use specific escaping aware of context and usecase</li>
                 </ul>
             </div>
             <footer></footer>
         </div>
 
-        <div id="page-wrapup" class="title step slide" data-x="10500" data-y="0" data-z="-4000" data-rotate-y="-150">
+        <div id="page-wrapup" class=" step slide" data-x="10500" data-y="0" data-z="-4000" data-rotate-y="-150">
             <header>
                 <h2>Wrapup -<br/>what now?</h2>
             </header>
             <div>
                 <h3 class="header--bold">What to take away from this</h3>
-
-                <p>Dont post naked photos of yourself on the internet?</p>
+                <ul>
+                    <li>Dont post naked photos of yourself on the internet?</li>
+                    <li>... what else???</li>
+                </ul>
+                
             </div>
             <footer></footer>
         </div>
@@ -1109,6 +1095,15 @@ if (array_key_exists($goto, $redirectMap)) {
             <header>
                 <h3>What to do</h3>
             </header>
+            <div>
+                <ul>
+                    <li>Check regularily on updates</li>
+                    <li>develop with security in mind (security by design)</li>
+                    <li>use common practices (CSRF tokens, redirect checks, escape methods)</li>
+                    <li>implement the tools to help you with this in your daily processes</li>
+                </ul>
+                
+            </div>
         </div>
 
         <div id="page-wrapup-2" class="step slide" data-x="10500" data-y="5000" data-z="-4000" data-rotate-y="-150">
@@ -1137,44 +1132,6 @@ if (array_key_exists($goto, $redirectMap)) {
                 </li>
             </ul>
         </div>
-        
-
-        <!-- div id="page-0-2" class="step slide" data-x="3000" data-y="-2000" data-z="0" data-rotate-y="-60">
-            <header>
-                <h3>Reports are available for DE / AT /CH</h3>
-            </header>
-            <section>
-
-            <ul type="square">
-
-                <li style="margin-bottom:1em">
-                    XML for DE is provided by<br />
-                     PDF is <b class="field-is-mandatory">inline</b>
-                    <ul>
-                        <li style="margin:0.5em 0">
-                            small companies<br />
-                            from roughly compact/premium: 30/80 <b class="field-is-mandatory">KB</b><br />
-                           PDF adds <b class="field-is-mandatory">50KB</b>
-                        </li>
-                        <li>
-                            big companies<br />
-                            to roughly compact/premium: 50/560 <b class="field-is-mandatory">KB</b><br />
-                            PDF adds <b class="field-is-mandatory">350KB</b>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    since the data is <b class="field-is-mandatory">all there</b> at once
-                    <b class="field-is-mandatory">no restrictions</b> what to show where and when!!<br />
-                    But the user has to wait</i>
-                </li>
-
-            </ul>
-            </section>
-
-            <footer></footer>
-        </div -->
 
         <div id="final" class="step slide" data-x="0" data-y="20000" data-z="9999" data-rotate-y="0">
             <header>
@@ -1190,7 +1147,7 @@ if (array_key_exists($goto, $redirectMap)) {
             // our main configuration
             var config = {
                 viewPort: {
-                    height: 1200,
+                    height: 850,
                     maxScale: 4,
                     initalScale: 1,
                     zoomable: false
