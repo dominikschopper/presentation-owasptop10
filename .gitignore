@@ -1,4 +1,14 @@
-.vscode
+.idea/
+*.iml
+*.iws
+*.eml
+out/
 .DS_Store
-**/.DS_Store
-css/fontawesome-free-5.5.0-web
+.svn
+log/*.log
+tmp/**
+node_modules/
+package-lock.json
+.sass-cache
+css/reveal.min.css
+js/reveal.min.js
