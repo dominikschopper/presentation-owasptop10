@@ -1,0 +1,13 @@
+{
+  "name": "presentation.owasp-top10",
+  "version": "2.0.0",
+  "description": "presentation about OWASP Top10 (v2017) from a developer perspective (using revealjs)",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["revealjs", "OWASP", "OWASP Top 10", "OWASP Top10", "security", "vulnerabilities"],
+  "author": "dominik.schopper@bisnode.com",
+  "license": "MIT",
+  "dependencies": {}
+}
