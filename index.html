@@ -1,49 +1,235 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<link rel="stylesheet" href="./css/bisnode-defaults.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section id="title" class="chapter"
+					data-background-image="img/bgs/halloween-face.jpg"
+					data-background-position="95% 5%">
+				<h1 class="">OWASP Top10</h1>
+				<h3 class="hl-red">developers worst nightmare???</h3>
+			</section>
+
+			<section class="slidegroup-intro">
+				<section id="slide-01" class="chapter" 
+					data-background-image="img/bgs/european_wasp_transp_bg.png"
+					data-background-size="40%"
+					data-background-position="90% 25%"
+					data-autoslide="2000">
+					<h2 class="hl-green">OWASP</h2>
+					
+					<p class="fragment" data-autoslide="1500">owa...hhht???</p>
+
+					<blockquote class="fragment" data-autoslide="0">
+						OWASP is an international organization [...]. OWASP is an open community
+						dedicated to enabling  organizations to conceive, develop, acquire, operate,
+						and maintain applications that can be trusted.
+						<legend>website of owasp: 
+							<a target="_blank" href="https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project#The_OWASP_Foundation">
+								owasp.org
+							</a>
+						</legend>
+					</blockquote>
+
+					<ul class="fragment" data-autoslide="0">
+						<li>non for profit since 2001</li>
+						<li>all things security related</li>
+						<li>supports/manages projects</li>
+					</ul>
+					
+				</section>
+
+				<section id="slide-02" class="numbered-list" data-autoslide="0">
+					<h2>OWASP Top10</h2>
+					<p class="fragment fade-out">a list of widespread vulnerabilities</p>
+					<div class="row-two-cols">
+							<ol class="col-1-2">
+								<li data-autoslide="500" class="fragment">
+									Injection (SQL, LDAP, Shell, ...)
+								</li>
+								<li data-autoslide="500" class="fragment">
+									Broken Authentication
+								</li>
+								<li data-autoslide="500" class="fragment">
+									Sensitive Data Exposure
+								</li>
+								<li data-autoslide="500" class="fragment">
+									XML External Entities (XXE)
+								</li>
+								<li data-autoslide="500" class="fragment">
+									Broken Access Control<br/>
+									<span style="font-size:1rem;color: grey;">
+										v2013: Dir. Obj. Ref + Func Level Access Ctrl.
+									</span>
+								</li>
+							</ol>
+							<ol class="col-1-2" start="6">
+								<li data-autoslide="500" class="fragment">
+									Security Misconfiguration
+								</li>
+								<li data-autoslide="500" class="fragment">
+									XSS (Cross Site Scripting)<br />
+									https://www.youtube.com/watch?v=u4uq0p2YAdk
+								</li>
+								<li data-autoslide="500" class="fragment">
+									Insecure Deserialization
+								</li>
+								<li data-autoslide="500" class="fragment">
+									Using Components with KnownVulnerabilities
+								</li>
+								<li data-autoslide="0" class="fragment">
+									Insufficient Logging &amp; Monitoring
+								</li> 
+							</ol>
+					</div>
+				</section>
+
+			</section>
+
+			<section id="injection">
+
+				<section id="slide-05"
+						class="chapter"
+						data-background-image="./img/bgs/exploits_of_a_mom.png"
+						data-background-size="66.66666%"
+						data-background-position="80% 10%">
+
+					<h3>Injection</h3>
+					<h4>SQL, NoSQL, OS/Shell &amp; LDAP injection</h4>
+				</section>
+
+				<section id="slide-06">
+					<h5>how does it work?</h5>
+
+					<ul>
+						<li>enter an SQL/LDAP/Shell command into a form</li>
+						<li>the command gets accidentally executed by the server</li>
+						<li>voilà: you gain access, see/download/... stuff you should not</li>
+					</ul>
+				</section>
+
+				<section id="slide-07">
+					<h5>what to do against it</h5>
+
+					<ul>
+						<li>01</li>
+						<li>02</li>
+						<li>03</li>
+					</ul>
+				</section>
+			</section>
+
+			<section id="broken-auth">
+				<section id="slide-08">slide 08</section>
+				<section id="slide-09">slide 09</section>
+				<section id="slide-10">slide 10</section>
+			</section>
+
+			<section id="data-exposure">
+				<section id="slide-11">slide 11</section>
+				<section id="slide-12">slide 12</section>
+				<section id="slide-13">slide 13</section>
+			</section>
+
+			<section id="xxe">
+				<section id="slide-14">slide 14</section>
+				<section id="slide-15">slide 15</section>
+				<section id="slide-16">slide 16</section>
+			</section>
+
+			<section id="bad-access-ctrl">
+				<section id="slide-17" class="chapter">
+					<h2>Broken Access Control</h2>
+				</section>
+
+				<section id="slide-18">
+					<h3>What is it?</h3>
+					
+					<h4>Missing function level access control?</h4>
+
+					<p>Applications often do not protect application functions.</p>
+					<p>
+						What should be available to an admin and not to a normal user is just
+						hidden and not properly checked if it as called by an admin. See
+						OWASP Juice Shop
+					</p>
+					
+					<h4>Insecure direct Object References</h4>
+
+					<p>
+						Database IDs and other identifiers are used within the application without
+						any further checks or abstraction<br/>
+						E.g. Show the admin only data as normal customer ...
+					</p>
+
+				</section>
+				<section id="slide-19">slide 19</section>
+			</section>
+			<section id="slide-20">slide 20</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			
+			progress: true,
+			fragmentInURL: true,
+			controlsTutorial: false,
+			controlsLayout: 'edges',
+			slideNumber: true,
+			// parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg",
+			history: true,
+			loop: false,
+			help: true, // false => for presentation
+			// showNotes: true, // false => for presentation
+
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{
+					src: 'plugin/notes/notes.js',
+					async: true
+				},
+				{
+					src: 'plugin/highlight/highlight.js',
+					async: true,
+					callback: () => hljs.initHighlightingOnLoad()
+				}
+			]
+		});
+	</script>
+</body>
+
 </html>
