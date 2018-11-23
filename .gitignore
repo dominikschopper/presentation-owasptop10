@@ -13,3 +13,5 @@ package-lock.json
 .sass-cache
 css/reveal.min.css
 js/reveal.min.js
+css/default.css
+css/bisnode-defaults.css
