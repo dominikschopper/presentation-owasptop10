@@ -1,0 +1,105 @@
+@font-face {
+    font-family: "bisnode-sans";
+    src: url("../assets/bisnode-sans/BisnodeSans-Bold.eot") format("OpenType"),
+        url("../assets/bisnode-sans/BisnodeSans-Bold.woff") format("woff"),
+        url("../assets/bisnode-sans/BisnodeSans-Bold.woff2") format("woff2");
+        font-weight: bold;
+}
+
+@font-face {
+    font-family: "bisnode-sans";
+    src: url("../assets/bisnode-sans/BisnodeSans-Regular.eot") format("OpenType"),
+         url("../assets/bisnode-sans/BisnodeSans-Regular.woff") format("woff"),
+         url("../assets/bisnode-sans/BisnodeSans-Regular.woff2") format("woff2");
+         font-weight: normal;
+}
+
+html,
+body,
+html body {
+    font-family: 'Roboto', Helvetica, Arial, Verdana, sans-serif;
+    background-color: #242b43;
+    font-size: 16px;
+}
+
+html body .reveal section * {
+    font-family: 'Roboto', Helvetica, Arial, Verdana, sans-serif;
+}
+
+.reveal blockquote {
+    font-size: 1.5rem;
+    text-align: left;
+}
+.reveal blockquote legend {
+    display: block;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    color: grey;
+}
+
+.reveal .controls[data-controls-layout="edges"] {
+    color: #329e98;
+}
+
+html body .reveal section h1,
+html body .reveal section h2,
+html body .reveal section h3,
+html body .reveal section h3 {
+    font-family: bisnode-sans, Arial, Helvetica, sans-serif;
+}
+
+html body .reveal .chapter h1 {
+    color: #d53868;
+}
+
+html body .reveal .chapter h2 {
+    color: #329e98;  
+}
+
+html body .reveal .chapter h3 {
+    color: #d59e38;
+}
+
+html body .reveal .chapter h4 {
+    color: rgb(108, 129, 201); /* rgb(72, 86, 134) */
+}
+
+.reveal .hl-red {
+    color: #d53868;
+    font-weight: 500;
+}
+
+.reveal .hl-orange {
+    color: #d59e38;
+    font-weight: 500;
+}
+.reveal .hl-green {
+    color: #329e98;
+    font-weight: 500;
+}
+
+#bis-logo {
+    position: fixed;
+    bottom: 2rem;
+    left: 1.5rem;
+    height: 3rem;
+}
+
+.numbered-list ol li {
+    list-style-type: decimal;
+    font-size: 1.75rem;
+    line-height: 2rem;
+    margin-bottom: 1.25rem;
+}
+
+.row-two-cols {
+    display: flex;
+}
+
+.row-two-cols .col-1-2 {
+    width: 48%;
+    margin-left: 2%;
+    margin-top: 1rem;
+    flex-basis: 48%;
+}
