@@ -15,3 +15,8 @@ css/reveal.min.css
 js/reveal.min.js
 css/default.css
 css/bisnode-defaults.css
+jmpress/animate-animations.css
+jmpress/basic-animations.css
+jmpress/bootstrap.min.css
+jmpress/jmpress.all.js
+jmpress/jquery.js
