@@ -20,3 +20,5 @@ jmpress/basic-animations.css
 jmpress/bootstrap.min.css
 jmpress/jmpress.all.js
 jmpress/jquery.js
+docker/.data
+docker/OWASP_Juice_Shop*.zip
