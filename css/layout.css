@@ -1,0 +1,10 @@
+.reveal .slides .row-with-cols {
+    display: flex;
+    align-content: space-between;
+}
+
+.reveal .slides .col-1-2 {
+    width: 44%;
+    margin-left: 2%;
+    margin-right: 4%;
+}

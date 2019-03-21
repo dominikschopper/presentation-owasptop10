@@ -5,13 +5,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+	<title>OWASP Top10 (v2017)</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 	<link rel="stylesheet" href="css/reveal.css">
 	<link rel="stylesheet" href="css/theme/black.css">
 
-	<link rel="stylesheet" href="./css/bisnode-defaults.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/bisnode-defaults.css">
 
 	<!-- Theme used for syntax highlighting of code -->
 	<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,6 +25,40 @@
 		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
+
+	<style>
+		.reveal .mock-form {
+			width: 50%;
+			padding: 1rem 2rem;
+			margin: 1rem auto;
+			background-color: rgba(255, 255, 255, 0.7);
+		}
+		.mock-form label {
+			display: inline-block;
+			margin: 1rem 2rem 1rem 0;
+		}
+		.mock-form input {
+			background-color: rgba(255,255,255,0.5);
+			padding: 0.75rem 1rem;
+			line-height: 1.75rem;
+			font-size: 1.5rem;
+			border: 1px solid white;
+			display: inline-block;
+			margin-left: 2rem;
+		}
+		textarea.code {
+			display: block;
+			width: 100%;
+			border: none;
+			background: transparent;
+			overflow: visible;
+			color: silver;
+			background: #323232;
+			padding: 0.75rem 1.5rem;
+			height: 2rem;
+			line-height: 1.5rem;
+		}
+	</style>
 </head>
 
 <body>
@@ -68,10 +103,10 @@
 				<section id="slide-02" class="numbered-list" data-autoslide="0">
 					<h2>OWASP Top10</h2>
 					<p class="fragment fade-out">a list of widespread vulnerabilities</p>
-					<div class="row-two-cols">
+					<div class="row-with-cols">
 							<ol class="col-1-2">
 								<li data-autoslide="500" class="fragment">
-									Injection (SQL, LDAP, Shell, ...)
+									Injection (SQL, LDAP, Shell...)
 								</li>
 								<li data-autoslide="500" class="fragment">
 									Broken Authentication
@@ -82,9 +117,9 @@
 								<li data-autoslide="500" class="fragment">
 									XML External Entities (XXE)
 								</li>
-								<li data-autoslide="500" class="fragment">
+								<li data-autoslide="500" class="fragment" style="line-height:1rem;">
 									Broken Access Control<br/>
-									<span style="font-size:1rem;color: grey;">
+									<span style="font-size:1rem;color:grey;">
 										v2013: Dir. Obj. Ref + Func Level Access Ctrl.
 									</span>
 								</li>
@@ -93,9 +128,11 @@
 								<li data-autoslide="500" class="fragment">
 									Security Misconfiguration
 								</li>
-								<li data-autoslide="500" class="fragment">
-									XSS (Cross Site Scripting)<br />
-									https://www.youtube.com/watch?v=u4uq0p2YAdk
+								<li data-autoslide="500" class="fragment" style="line-height:1rem;">
+                                    XSS (Cross Site Scripting)<br />
+                                    <span style="font-size:1rem;color:grey;">
+                                        https://www.youtube.com/watch?v=u4uq0p2YAdk
+                                    </span>
 								</li>
 								<li data-autoslide="500" class="fragment">
 									Insecure Deserialization
@@ -128,39 +165,143 @@
 					<h5>how does it work?</h5>
 
 					<ul>
-						<li>enter an SQL/LDAP/Shell command into a form</li>
-						<li>the command gets accidentally executed by the server</li>
-						<li>voilà: you gain access, see/download/... stuff you should not</li>
+						<li>enter an SQL/LDAP/Shell command into a form (or send it to a service directly)</li>
+						<li class="fragment" data-fragment-index="3">
+							the command gets &quot;accidentally&quot; executed by the server
+						</li>
+						<li class="fragment" data-fragment-index="3">
+							you gain access, see/download/delete... stuff you should not
+						</li>
 					</ul>
+
+					<div class="mock-form">
+						<span class="fragment" data-fragment-index="1">
+							<label for="mock-search">name</label>
+							<input type="search" name="search" id="mock-search" value="hahaha' OR 1 = 1" />
+						</span>
+					</div>
+
+
 				</section>
 
 				<section id="slide-07">
 					<h5>what to do against it</h5>
 
 					<ul>
-						<li>01</li>
-						<li>02</li>
-						<li>03</li>
+						<li>input sanitazation (whitelisting instead of blacklisting)</li>
+						<li>escaping in SQL/HTML/...</li>
+						<li class="fragment">use Libraries functionality</li>
 					</ul>
 				</section>
 			</section>
 
 			<section id="broken-auth">
-				<section id="slide-08">slide 08</section>
-				<section id="slide-09">slide 09</section>
-				<section id="slide-10">slide 10</section>
+				<section id="slide-08"
+					class="chapter"
+					data-background-image="./img/bgs/broken-lock.jpg"
+					data-background-size="45%"
+					data-background-position="80% 10%">
+
+					<h2>Broken Authentication</h2>
+
+				</section>
+
+				<section id="slide-09" data-autoslide="0">
+					<h3>What does it mean?</h3>
+
+					<p>when you ...</p>
+
+					<ul>
+						<li class="fragment">expose session IDs (in URLs?, in Cookies?)</li>
+						<li class="fragment">do not rotate session IDs after login (session fixation)</li>
+						<li class="fragment">do not invalidate session IDs</li>
+						<li class="fragment">store passwords unencrypted</li>
+						<li class="fragment">transmit authentication not on https</li>
+					</ul>
+
+				</section>
+				<section id="slide-10">
+					<h3>Mitigation</h3>
+
+					<ul>
+						<li class="fragment">sessionId storage secure, httpOnly, sameSite and in cookie only</li>
+						<li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
+						<li class="fragment">manage SessionId just like any other user input</li>
+						<li class="fragment">detect/prevent brute forcing</li>
+						<li class="fragment">renew the sessionID after any privilege level change</li>
+						<li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
+						<li class="fragment">provide a logout button</li>
+						<li class="fragment">logging sessions lifecycle</li>
+					</ul>
+				</section>
 			</section>
 
 			<section id="data-exposure">
-				<section id="slide-11">slide 11</section>
-				<section id="slide-12">slide 12</section>
-				<section id="slide-13">slide 13</section>
+				<section id="slide-11" class="chapter">
+					<h2>Data Exposure</h2>
+				</section>
+
+				<section id="slide-12">
+					<h2>What data exposed to ...?</h2>
+
+					<ul>
+
+						<li class="fragment">Usernames (or emails, passwords, ...)</li>
+						<li class="fragment">Creditcard, banking infos, ...</li>
+						<li class="fragment">Other systems hostnames, usernames, passwords</li>
+						<li class="fragment">Backup Files of the application</li>
+						<li class="fragment">Logfiles, System output, ...</li>
+						<li class="fragment">Session IDs, Tokens ...</li>
+
+					</ul>
+				</section>
+
+				<section id="slide-13">
+					<h2>How to prevent this?</h2>
+
+					<p class="fragment" style="color:#d53868;text-align: center;">think before you store!</p>
+
+					<ul>
+						<li class="fragment">TLS encrypt connections</li>
+						<li class="fragment">Webroot and public available dirs <u>must not</u> contain sensitive data (Backups, Logs, ...)</li>
+						<li class="fragment">hash passwords</li>
+						<li class="fragment">protect sessions, check apache config</li>
+					</ul>
+				</section>
 			</section>
 
 			<section id="xxe">
-				<section id="slide-14">slide 14</section>
-				<section id="slide-15">slide 15</section>
-				<section id="slide-16">slide 16</section>
+				<section id="slide-14" class="chapter">
+					<h2>XXE - XML external entities</h2>
+				</section>
+				<section id="slide-15">
+					<h2>Where is this a problem?</h2>
+					<ul>
+						<li>User Input gets written into XML (SOAP?)</li>
+						<li>SAML is used (XML based auth protocol for SSO)</li>
+						<li>XML files get processed by the application</li>
+					</ul>
+
+					<h2>How can this be exploited</h2>
+
+					<ul>
+						<li style="width:400px">
+							<textarea class="code"><!ENTITY xxe SYSTEM "file:///etc/passwd" >]></textarea>
+						</li>
+						<li style="width:400px">
+							<textarea class="code"><!ENTITY xxe SYSTEM "file:///dev/random" >]></textarea>
+						</li>
+					</ul>
+				</section>
+				<section id="slide-16">
+					<h2>What to do?</h2>
+
+					<ul>
+						<li class="fragment">switch off XXE</li>
+						<li class="fragment">escape all inputs context sensitive</li>
+						<li class="fragment">to enforce: have regular code reviews</li>
+					</ul>
+				</section>
 			</section>
 
 			<section id="bad-access-ctrl">
@@ -191,7 +332,108 @@
 				</section>
 				<section id="slide-19">slide 19</section>
 			</section>
-			<section id="slide-20">slide 20</section>
+
+			<section id="sec-misconfig">
+				<section id="slide-20" class="chapter">
+					<h2>Security Misconfiguration</h2>
+				</section>
+
+				<section id="slide-21">
+					<h2>Why should anyone do that??</h2>
+
+					<ul>
+						<li class="fragment">Unnecessary features are enabled or installed (unnecessary ports, services, pages, accounts, or privileges).</li>
+						<li class="fragment">Default accounts and their passwords still enabled and unchanged.</li>
+						<li class="fragment">Error handling reveals stack traces or other overly informative error messages to users.</li>
+					</ul>
+				</section>
+
+				<section id="slide-22">
+					<h2>What to do?</h2>
+				</section>
+			</section>
+
+			<section id="xss">
+				<section id="slide-23" class="chapter">
+					<h2>XSS &rarr; Cross Site Scripting</h2>
+				</section>
+
+				<section id="slide-24">
+					<h2>What iis XSS?</h2>
+				</section>
+
+				<section id="slide-25">
+					<h2>How to prevent it?</h2>
+				</section>
+			</section>
+
+			<section id="insec-serialization">
+				<section id="slide-26" class="chapter">
+					<h2>Insecure Deserialization</h2>
+				</section>
+
+				<section id="slide-27">
+					<h2>Why is this a problem?</h2>
+
+					<p>Anytime we use User input in a serialized object</p>
+				</section>
+
+				<section id="slide-28">
+					<h2>What to do about this?</h2>
+				</section>
+			</section>
+
+			<section id="known-vulnerabs">
+				<section id="slide-29" class="chapter">
+					<h2>Using Components Known vulnerabilities</h2>
+				</section>
+
+				<section id="slide-30">
+					<h2>Who would do that?? And why??</h2>
+					
+				</section>
+
+				<section id="slide-31">
+					<h2>What to do?</h2>
+				</section>
+			</section>
+
+			<section id="insuff-logging">
+				<section id="slide-32" class="chapter">
+					<h2>Insufficent Logging &amp; Monitoring</h2>
+				</section>
+				
+				<section id="slide-33">
+						<h2>What is the problem here?</h2>
+				</section>
+
+				<section id="slide-34">
+					<h2>What to do?</h2>
+				</section>
+			</section>
+
+			<section id="wrapup">
+				<section id="slide-35" class="chapter">
+					<h2>What else?</h2>
+				</section>
+
+				<section id="slide-36">
+					<h2>My Proposals</h2>
+					<ul>
+						<li class="fragment">Code Reviews, Code Reviews, Code Reviews</li>
+						<li class="fragment">Define Standards</li>
+						<li class="fragment">Stick to your workflows</li>
+						<li class="fragment">Say "No!" to time pressure</li>
+						<li class="fragment">Automate (security) tests</li>
+					</ul>
+				</section>
+			</section>
+
+			<section id="thx">
+				<section id="last" class="chapter">
+					<h2>Thank you for your patience</h2>
+				</section>
+			</section>
 		</div>
 	</div>
 
@@ -203,7 +445,9 @@
 		// - https://github.com/hakimel/reveal.js#configuration
 		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
-			
+            
+            width: 1124,
+			height: 820,
 			progress: true,
 			fragmentInURL: true,
 			controlsTutorial: false,
@@ -213,7 +457,8 @@
 			history: true,
 			loop: false,
 			help: true, // false => for presentation
-			// showNotes: true, // false => for presentation
+            // showNotes: true, // false => for presentation
+            
 
 			dependencies: [
 				{ src: 'plugin/markdown/marked.js' },
