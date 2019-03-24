@@ -1,1167 +1,683 @@
-<!DOCTYPE html>
-<html lang="de">
+<!doctype html>
+<html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta http-equiv="expires" content="0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="stylesheet" href="./jmpress/bootstrap.min.css" />
+    <title>OWASP Top10 (v2017)</title>
 
-    <link href="./jmpress/basic-animations.css" rel="stylesheet" />
-    <link href="./jmpress/animate-animations.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-    <!-- link rel="stylesheet" href="./css/font-awesome-4.2.0/css/font-awesome.min.css" / -->
-    <!-- link href="../highlight/styles/github.css" rel="stylesheet"/ -->
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/bisnode-defaults.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="./css/default.css" rel="stylesheet" />
-    <!-- own stylesheet, bases on impr"7"ess.js-->
-    <!-- link href="./bkc.css" rel="stylesheet" / -->
-    <link rel="stylesheet" href="./jmpress/basic-animations.min.css">
-    <!-- font awesome -->
-    <link rel="stylesheet" href="./css/font-awesome.min.css">
-    <title>OWASP Top 10 - what the heck is that???</title>
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-    <script type="text/javascript" src="./jmpress/jquery.js"></script>
-    <script src="./jmpress/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./jmpress/jmpress.all.js"></script>
     <style>
-        body {
-            font-family: 'Roboto', Tahoma, Verdana, sans-serif;
-            color: rgb(32, 32, 32);
+        .reveal .mock-form {
+            width: 50%;
+            padding: 1rem 2rem;
+            margin: 1rem auto;
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
-        body h1,
-        body h2,
-        body h3,
-        body h4,
-        body h5,
-        body * {
-            font-family: 'Roboto', Tahoma, Verdana, sans-serif;
-            color: rgb(42, 42, 42);
-        }
-
-        code {
-            font-family: Courier New, Courier, monospace;
-            background-color: rgb(212, 212, 212);
-            padding: 0.25em 0.75em;
-        }
-
-        body .slide footer {
-            margin-left: -7%;
-        }
-
-        header,
-        .slide header {
-            background: none;
-        }
-
-        body .title header,
-        body .slide header {
-            position: relative;
-        }
-
-        body .title header {
-            height: 50%;
-        }
-
-        .title header h1,
-        .title header h2,
-        .title header h3,
-        .title header .subtitle {
-            position: absolute;
+        .mock-form label {
             display: inline-block;
-            padding: 0.25em 0.33333em 0.125em;
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: 2%;
-            margin-right: 33%;
-            background-color: black;
-            color: white;
-            font-weight: bold;
-            min-height: 0;
+            margin: 1rem 2rem 1rem 0;
+            color: #323232;
         }
 
-        .title header h1,
-        .title header h2,
-        .title header h3 {
-            bottom: 1.5em;
-        }
-
-        .title header .subtitle {
-            bottom: 1em;
-        }
-
-        .slide header h1,
-        .slide header h2,
-        .slide header h3,
-        .slide header h4 {
-            background-color: black;
-            color: white;
-            font-weight: bold;
+        .mock-form input {
+            background-color: white;
+            border: 1px solid white;
             display: inline-block;
-            padding: 0.25em 0.33333em 0.125em;
+            line-height: 1.75rem;
+            font-size: 1.5rem;
+            padding: 0.75rem 1rem;
+            margin-left: 2rem;
+            border: 1px solid black;
         }
 
-        .slide header h1 b,
-        .slide header h2 b,
-        .slide header h3 b,
-        .slide header h4 b {
-            color: red;
-        }
-
-        .list-items-spacing-2 li {
-            margin: 1em 0;
-        }
-
-        .owasp-smaller-text {
-            display: inline-block;
-            margin-top: -0.5em;
-            font-size: 0.7em;
-            line-height: 0.8em;
-        }
-
-        .navbar-inverse .container-fluid .navbar-header a,
-        .navbar-inverse .container-fluid .navbar-header .fa,
-        .navbar-inverse .container-fluid .navbar-nav a,
-        .navbar-inverse .container-fluid .navbar-nav .fa {
-            color: rgb(192, 192, 192);
-        }
-
-        .navbar-inverse .container-fluid .navbar-header .dropdown-menu a,
-        .navbar-inverse .container-fluid .navbar-header .dropdown-menu .fa,
-        .navbar-inverse .container-fluid .navbar-nav .dropdown-menu a,
-        .navbar-inverse .container-fluid .navbar-nav .dropdown-menu .fa {
-            color: rgb(32, 32, 32);
-        }
-
-        .evil-code {
-            color: red;
-        }
-
-        .inverted {
-            color: rgb(242, 242, 242);
-        }
-
-        .highlight42 {
-            color: darkred;
-        }
-
-        .inline-code {
-            font-family: Courier New, Courier, monospace;
-            font-weight: bold;
-            padding: 0 1em;
-        }
-        .slide .text--red {
-            color: #EE3333;
-        }
-        
-        .slide .text--bold {
-            font-weight: bold;
-        }
-        .slide ol>li,
-        .slide ul>li {
-            list-style-type: square;
-            margin-top: 0.5em;
-            margin-bottom: 0.75em;
-        }
-
-        .slide ol.compact-list>li,
-        .slide ul.compact-list>li {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        .double-column-list {
+        textarea.code {
             display: block;
-            width: 45%;
-            margin: 0 0 0 3%;
-            float: left;
-            line-height: 1.4em
+            width: 100%;
+            border: none;
+            background: transparent;
+            overflow: visible;
+            color: silver;
+            background: #323232;
+            padding: 0.75rem 1.5rem;
+            height: 2.5rem;
+            line-height: 2rem;
+            font-size: 2rem;
+            color: #d59e38;
         }
-
-        .header--bold {
-            font-weight: bold;
-            font-size: 3.2rem;
-        }
-
     </style>
-
-    <!--  optional meta tag for presentation date -->
-    <meta name="date" content="2017-10-03" />
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                            <span class="sr-only">Toggle Navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                <a href="./" class="navbar-brand" title="Start"><i class="fa fa-lg fa-home"></i></a>
-            </div>
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#/title">OWASP Top 10</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#/title-0" class="dropdown-toggle" data-toggle="dropdown">OWAS... huh?<b class="caret inverted"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#/page-0-1">What is OWASP?</a></li>
-                            <li><a href="#/page-0-2">Why attack in the first place?</a></li>
-                            <li><a href="#/page-0-3">OWASPs TOP10</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">TOP10 in detail<b class="caret inverted"></b></a>
-                        <ol class="dropdown-menu">
-                            <li>
-                                <a href="#/page-10-0">10. Unvalidated Redirects </a>
-                            </li>
-                            <li>
-                                <a href="#/page-9-0">9. Using Components with known vulnerabilities</a>
-                            </li>
-                            <li>
-                                <a href="#/page-8-0">8. Cross Site Request Forgery</a>
-                            </li>
+    <div class="reveal">
+        <div class="slides">
+            <section id="title" class="chapter" data-background-image="img/bgs/halloween-face.jpg"
+                data-background-position="95% 5%">
+                <h1 class="">OWASP Top10</h1>
+                <h3 class="hl-red">developers worst nightmare???</h3>
+            </section>
 
-                            <li>
-                                <a href="#/page-7-0">7. No Function Level Access Control</a>
-                            </li>
+            <section class="slidegroup-intro">
+                <section id="slide-01" class="chapter" data-background-image="img/bgs/european_wasp_transp_bg.png"
+                    data-background-size="40%" data-background-position="90% 25%" data-autoslide="2000">
+                    <h2 class="hl-green">OWASP</h2>
 
-                            <li>
-                                <a href="#/page-6-0">6. Sensitive Data Exposure</a>
-                            </li>
+                    <p class="fragment" data-autoslide="1500">owa...hhht???</p>
 
-                            <li>
-                                <a href="#/page-5-0">5. Security Misconfiguration</a>
-                            </li>
+                    <blockquote class="fragment" data-autoslide="0">
+                        OWASP is an international organization [...]. OWASP is an open community
+                        dedicated to enabling organizations to conceive, develop, acquire, operate,
+                        and maintain applications that can be trusted.
+                        <legend>website of owasp:
+                            <a target="_blank"
+                                href="https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project#The_OWASP_Foundation">
+                                owasp.org
+                            </a>
+                        </legend>
+                    </blockquote>
 
-                            <li>
-                                <a href="#/page-4-0">4. Insecure Direct Object Ref.s</a>
-                            </li>
+                    <ul class="fragment" data-autoslide="0">
+                        <li>non for profit since 2001</li>
+                        <li>all things security related</li>
+                        <li>supports/manages projects</li>
+                    </ul>
 
-                            <li>
-                                <a href="#/page-3-0">3. Cross Site Scripting</a>
-                            </li>
+                </section>
 
-                            <li>
-                                <a href="#/page-2-0">2. Broken Auth &amp; Session Management</a>
+                <section id="owasp-overview" class="numbered-list" data-autoslide="0">
+                    <h2>OWASP Top10</h2>
+                    <p class="fragment fade-out">a list of widespread vulnerabilities</p>
+                    <div class="row-with-cols">
+                        <ol class="col-1-2">
+                            <li data-autoslide="500" class="fragment">
+                                Injection (SQL, LDAP, Shell...)
                             </li>
-
-                            <li>
-                                <a href="#/page-1-0">1. Injection</a>
+                            <li data-autoslide="500" class="fragment">
+                                Broken Authentication
                             </li>
-
+                            <li data-autoslide="500" class="fragment">
+                                Sensitive Data Exposure
+                            </li>
+                            <li data-autoslide="500" class="fragment">
+                                XML External Entities (XXE)
+                            </li>
+                            <li data-autoslide="500" class="fragment" style="line-height:1rem;">
+                                Broken Access Control<br />
+                                <span style="font-size:1rem;color:grey;">
+                                    v2013: Dir. Obj. Ref + Func Level Access Ctrl.
+                                </span>
+                            </li>
                         </ol>
-                    </li>
+                        <ol class="col-1-2" start="6">
+                            <li data-autoslide="500" class="fragment">
+                                Security Misconfiguration
+                            </li>
+                            <li data-autoslide="500" class="fragment" style="line-height:1rem;">
+                                XSS (Cross Site Scripting)<br />
+                                <span style="font-size:1rem;color:grey;">
+                                    https://www.youtube.com/watch?v=u4uq0p2YAdk
+                                </span>
+                            </li>
+                            <li data-autoslide="500" class="fragment">
+                                Insecure Deserialization
+                            </li>
+                            <li data-autoslide="500" class="fragment">
+                                Using Components with KnownVulnerabilities
+                            </li>
+                            <li data-autoslide="0" class="fragment">
+                                Insufficient Logging &amp; Monitoring
+                            </li>
+                        </ol>
+                    </div>
+                </section>
 
-                    <li>
-                        <a href="#/page-wrapup">Finishing Line</a>
-                    </li>
+            </section>
 
+            <!-- easy wins -->
+            <section class="chapter" data-background-image="img/bgs/minions-agreeing.jpg">
 
-                    <li class="divider" style="width:15%"></li>
-                    <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assignments<b class="caret"></b></a>
-                        <ul id="assignmentList" class="dropdown-menu">
+                <span style="display:inline-block;background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem;">
+                    <h2>Easy Wins</h2>
+
+                    <p>stuff we either already do or easily agree on doing</p>
+
+                    <ul class="fragment hl-green">
+                        <li>like eat healthy</li>
+                        <li>do more sports</li>
+                        <li>do more for the environment ...</li>
+                    </ul>
+                </span>
+            </section>
+
+            <section id="known-vulnerabs">
+                <section id="slide-29" class="chapter" data-background-image="img/bgs/no-updates.jpeg"
+                    data-background-position="90% 90%" data-background-size="30%">
+                    <h2>Using Components Known vulnerabilities</h2>
+                </section>
+
+                <section id="slide-30" data-autoslide="0">
+                    <h2>Who would do that?? And why??</h2>
+                    <ul class="fragment">
+                        <li>Using a framework <span class="fragment hl-red" data-autoslide="1">... and not updating
+                                it</span></li>
+                        <li>Using a library <span class="fragment hl-red" data-autoslide="1">... and not updating
+                                it</span></li>
+                        <li>Using a programm <span class="fragment hl-red" data-autoslide="1">... and not updating
+                                it</span></li>
+                        <li>Using a database <span class="fragment hl-red" data-autoslide="1">... and not updating
+                                it</span></li>
+                        <li>Using anything you did not code yourself <span class="fragment hl-red"
+                                data-autoslide="0">... and not updating it</span></li>
+                    </ul>
+                </section>
+
+                <section id="slide-31">
+                    <h2>What to do?</h2>
+
+                    <ul class="fragment">
+                        <li>Keep an inventory, a list or track anyhow which libraries and external code or programms
+                            you
+                            use</li>
+                        <li>Subscribe to mailing lists, that inform you about vulnerabilities.</li>
+                        <li>Search in the CVE Database (Common Vulnerabilities and Exposures)</li>
+                    </ul>
+
+                    <h4 class="fragment">Use tools like</h4>
+
+                    <ul class="fragment">
+                        <li>NSP (Node Security Project) NSP at Github</li>
+                        <li>OWASP Dependency Check OWASP DepCheck</li>
+                    </ul>
+
+                </section>
+            </section>
+
+            <section id="insuff-logging">
+                <section id="slide-32" class="chapter" data-background-image="img/bgs/pickpocket.jpg"
+                    data-background-position="95% 95%" data-background-size="30%">
+                    <h2>Insufficent Logging &amp; Monitoring</h2>
+                </section>
+
+                <section id="slide-33">
+                    <h2>Logging? Sure we do that!</h2>
+
+                    <p>but ...</p>
+
+                    <ul>
+                        <li class="fragment">warnings and errors generate no or unclear log messages.</li>
+                        <li class="fragment">failed (and successful) logins are not logged.</li>
+                        <li class="fragment">suspicious activity in logfiles is not monitored</li>
+                        <li class="fragment">logs are only stored locally.</li>
+                    </ul>
+                </section>
+
+                <section id="slide-34">
+                    <h2>Where are we?</h2>
+
+                    <ul class="fragment">
+                        <li>create logging rules in the team</li>
+                        <li>make checking logging part of the code reviews</li>
+                    </ul>
+
+                    <span class="fragment">
+                        <h4>Log this!</h4>
+                        <ul>
+                            <li> login, authoriz. failures, input validation failures (add context &larr; analysis)</li>
+                            <li> easy to consume log format </li>
+                            <li> &quot;important transactions&quot; should have an audit trail. </li>
+                            <li> prevent tampering with logfiles (append-only database tables...) </li>
+                            <li> monitoring and alerting should be defined. </li>
                         </ul>
-                    </li> -->
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
-        </div>
-    </nav>
-
-    <div id="impress">
-
-        <div id="title" class="title step slide" data-x="0" data-y="0" data-z="10000" data-rotate-y="180">
-            <header>
-                <h2>OWASP Top 10</h2>
-                <p class="subtitle">
-                    Explaining OWASP Top10 <span style="font-size:0.5em; color: #AEAEAE">(v2013)</span>
-                </p>
-            </header>
-            <footer></footer>
-        </div>
-
-        <div id="page--1-0" class="step slide" data-x="0" data-y="2500" data-z="10000" data-rotate-y="180">
-            <header>
-                <h2>Purpose of this Presentation</h2>
-            </header>
-            <div>
-                <ul type="square">
-                    <li>Give a clear understanding of the top 10 security risks</li>
-                    <li>Start a discussion within the dev teams</li>
-                    <li>Spread advice on how to prevent security holes</li>
-                    <li>Raise the awareness for security issues in the development teams</li>
-                    <li>Help making our applications more secure</li>
-                </ul>
-            </div>
-            <footer></footer>
-        </div>
-
-        <div id="page-0-0" class="title step slide" data-x="-2000" data-y="0" data-z="9000" data-rotate-y="210">
-            <header>
-                <h2>OWASP</h2>
-                <p class="subtitle will-zoom do-zoom" <p class="subtitle will-zoom do-zoom" data-jmpress="zoom">
-                    OWA...huh?
-                </p>
-            </header>
-            <footer></footer>
-        </div>
-
-        <div id="page-0-1" class="step slide" data-x="-2000" data-y="-2500" data-z="9000" data-rotate-y="210">
-            <header>
-                <h3 style="font-weight: normal; text-transform: none;">
-                    <b>O</b>pen
-                    <b>W</b>eb
-                    <b>A</b>pplication
-                    <b>S</b>ecurity
-                    <b>P</b>roject
-                </h3>
-            </header>
-
-            <div>
-                <blockquote>
-                    <img src="img/enwiki.png" alt="wikipedia logo" style="float:right;" /> ... is an online community which creates freely-available articles, methodologies, documentation, tools, and technologies in the field of web application security.<br />
-                    <legend><a href="https://en.wikipedia.org/wiki/OWASP">cited from wikipedia</a></legend>
-                </blockquote>
-
-                <br />
-                <blockquote>
-                    <img src="img/OWASP_Logo.png" alt="wikipedia logo" style="float:right;" /> The Open Web Application Security Project (OWASP) is a 501(c)(3) worldwide not-for-profit charitable organization focused on improving the security of software. Our mission is to make software security visible, so that individuals and organizations are able to make informed decisions<br />
-                    <legend><a href="https://www.owasp.org/index.php/Main_Page">cited from owasp.org</a></legend>
-                </blockquote>
-
-            </div>
-
-            <footer></footer>
-        </div>
-
-        <div id="page-0-2" class="step slide" data-x="-2000" data-y="-5000" data-z="9000" data-rotate-y="210">
-            <header style="padding:0;margin:0">
-                <h3>Attackers? Huh?</h3>
-                <p>Why should anyone attack my site?</p>
-            </header>
-            <p>&quot;Hackers&quot; attack to ... </p>
-            <ul type="square" class="compact-list will-zoom do-zoom" data-jmpress="zoom">
-                <li>
-                    Get data from the website (in our case
-                    <u>company data</u>,
-                    <u>user data</u>, ...)
-                </li>
-                <li>
-                    harvest financial user data from my site/DB
-                </li>
-                <li>
-                    Get Users to their (<b>evil!</b>) website
-                </li>
-                <li>
-                    Show ads/stuff on my website.
-                </li>
-                <li>
-                    Prevent my website from working / destroy my website
-                </li>
-                <li>
-                    distribute malware
-                </li>
-                <li>
-                    show its hackable / geting kudos from other hackers
-                </li>
-                <li>
-                    destroy my reputation
-                </li>
-                <li>
-                    break into that server to gain access to our network
-                </li>
-                <li>
-                    use my paid services for free
-                </li>
-                <li>
-                    ... and many many reasons more ...
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-0-3" class="step slide" data-x="-2000" data-y="-7500" data-z="9000" data-rotate-y="210">  
-            <header style="padding:0;margin:0">
-                <h3>OWASP Top 10 <span style="font-size:1.75rem;color:white;padding-left:1.5rem">v2013</span></h3>
-            </header>
-            <ol type="square" class="compact-list double-column-list">
-                <li>
-                    <strong class="danger">&nbsp;Injection&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">SQL, Shell/Command, Code ... execution</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Broken Session/Authentication&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">work with someones login</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Cross Site Scripting&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">execute JS in another browser</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Insecure Direct Object References&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">url parameters are db ids</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Session/Security Misconfiguration&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">errors in handling sessions or authentication</span>
-                </li>
-            </ol>
-            <ol start="6" class="compact-list">
-                <li>
-                    <strong class="danger">&nbsp;Sensitive data exposure&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">show data (in comments, files, ...)</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Missing Function level access control&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">use a function although I am not allowed</span>
-                </li>
-                <li>
-                    <strong class="danger">Cross Site Request Forgery</strong><br />
-                    <span class="owasp-smaller-text">call a service/url from another website</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Using components with known vulnerabilites&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">obviously insecure ...</span>
-                </li>
-                <li>
-                    <strong class="danger">&nbsp;Unvalidated Redirects and Forwards&nbsp;</strong><br />
-                    <span class="owasp-smaller-text">http://www.com?goto=http://evil.com</span>
-                </li>
-            </ol>
-            <footer></footer>
-        </div>
-
-        <div id="page-10-0" class="title step slide" data-x="-4000" data-y="0" data-z="4000" data-rotate-y="240">
-            <header>
-                <h2>Unvalidated Redirects ...</h2>
-                <p class="subtitle will-zoom do-zoom" <p class="subtitle will-zoom do-zoom" data-jmpress="zoom">
-                    ... wtf? Why is this a problem???
-                </p>
-            </header>
-            <footer></footer>
-        </div>
-
-        <div id="page-10-1" class="step slide" data-x="-4000" data-y="2500" data-z="4000" data-rotate-y="240">
-            <header>
-                <h3>Where are redirects used in web applications?<br/>How can they be exploited?</h3>
-            </header>
-
-            <div>
-                Often used to redirect after authentication
-            </div>
-
-            <ol>
-                <li data-jmpress="zoom" class="will-zoom do-zoom">
-                    You travel to <span class="inline-code">https://jira.bisnode.de/browse/SOME-4711</span>
-                </li>
-                <li data-jmpress="zoom" class="will-zoom do-zoom">
-                    the web application sends you to the <b>Login Form</b><br/> after filling out the data it is sent to<br />
-                    <span class="inline-code">https://jira.bisnode.de/login.jsp?dest=%2Fbrowse%2FSOME-4711</span>
-                </li>
-                <li data-jmpress="zoom" class="will-zoom do-zoom">
-                    And then you get redirected to<br/>
-                    <span class="inline-code">https://jira.bisnode.de/browse/SOME-4711</span>
-                </li>
-            </ol>
-
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-10-2" class="step slide" data-x="-4000" data-y="5000" data-z="4000" data-rotate-y="240">
-            <header>
-                <h3>How can unvalidated redirects be exploited?</h3>
-            </header>
-            <ol type="square">
-                <li>
-                    this could be sent by mail to all users in an enterprise<br/>
-                    <code>https://some.web/login?redirect=<span class="evil-code">http%3A%2F%2Fhack.me%2Fqwe</span></code>
-                </li>
-                <li>
-                    Users click on it and get to the login page and enter their user data
-                </li>
-                <li>
-                    After logging in the redirect goes to <span class="evil-code">http://hack.me/qwe</span><br/> which shows the <b>same login page</b>, but with the usual<br/>
-                    <span class="evil-code">Username or Password was wrong!</span>
-                </li>
-                <li>
-                    They enter the data again and the hacker has the <b>Username &amp; Password</b> and redirect to the original login page
-                </li>
-            </ol>
-            <footer></footer>
-        </div>
-
-        <div id="page-10-3" class="step slide" data-x="-4000" data-y="7500" data-z="4000" data-rotate-y="240">
-            <header>
-                <h3>How can we prevent this?<br/>&nbsp;<br/>Every Redirect: <b class="highlight42">must be validated</b></h3>
-            </header>
-
-            <div>
-                <pre><code>$goto = $_GET['redirect']; // place1
-$redirectMap = array(
-    'place1' => $baseUrl . '/where/to',
-    'place2' => $baseUrl . '/another/value',
-    // ...
-);
-if (array_key_exists($goto, $redirectMap)) {
-    $redirectUrl = $redirectMap[$goto];
-} else {
-    $redirectUrl = $deaultPage;
-}</code></pre>
-            </div>
-
-            <footer></footer>
-        </div>
-
-        <div id="page-9-0" class="title step slide" data-x="-9000" data-y="0" data-z="2000" data-rotate-y="270">
-            <header style="position:relative">
-                <h2 style="font-size:3.5rem;">
-                    Using Components with known vulnerabilities
-                </h2>
-                <p style="position:absolute; bottom:0;padding-left:2rem">
-                    ... huh? Why should this happen?
-                </p>
-            </header>
-            <footer></footer>
-        </div>
-
-        <div id="page-9-1" class="step slide" data-x="-9000" data-y="-2500" data-z="2000" data-rotate-y="270">
-            <header>
-                <h3>Using Components with know vulnerabilities</h3>
-            </header>
-            <p></p>
-            <ul type="square">
-                <li>Using a framework ... 
-                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
-                </li>
-
-                <li >Using a library ... 
-                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
-                </li>
-
-                <li >Using a programm ... 
-                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
-                </li>
-
-                <li >Using a database ... 
-                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
-                </li>
-
-                <li >Using anything you did not code yourself ...
-                    <span data-jmpress="fade" class="text--red text--bold">and not updating it</span>
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-9-2" class="step slide" data-x="-9000" data-y="-5000" data-z="2000" data-rotate-y="270">
-            <header>
-                <h3>How can we prevent this?</h3>
-            </header>
-            <ul type="square">
-                <li>Keep an inventory, a list or track anyhow which libraries and external code or programms you use</li>
-                <li>Subscribe to mailing lists, that inform you about vulnerabilities.</li>
-                <li>Search in the <a href="https://cve.mitre.org">CVE</a> Database (Common Vulnerabilities and Exposures)</li>
-            </ul>
-            <p>Use tools like</p>
-            <ul>
-                <li><b>NSP</b> (Node Security Project) <a href="https://github.com/nodesecurity/nsp">NSP at Github</a></li>
-                <li><b>OWASP Dependency Check</b> <a href="https://www.owasp.org/index.php/OWASP_Dependency_Check">OWASP DepCheck</a></li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-8-0" class="title step slide" data-x="-10500" data-y="0" data-z="0" data-rotate-y="300">
-            <header>
-                <h2>Cross site request forgery</h2>
-                <p class="subtitle will-zoom do-zoom" data-jmpress="zoom">
-                    ... cross ... whaaat???
-                </p>
-            </header>
-            <footer></footer>
-        </div>
-
-        <div id="page-8-1" class="step slide" data-x="-10500" data-y="2500" data-z="0" data-rotate-y="300">
-            <header>
-                <h3>What is CRSF?</h3>
-            </header>
-
-            <ul type="square">
-
-                <li>
-                    Getting an application to process data from outside the application, e.g. inserting an image 
-                    in one website, that sends data to another website
-                </li>
-                
-                <li>
-                    By being in one page/application, you do something else on another page too<br/>
-                    The Amazon Shopping Cart is an application that allows these things<br/>
-                    <code>
-                            &lt;a href="product_affiliate_link"&gt;&lt;img src="https://images-na.ssl-images-amazon.com/images/G/01/associates/remote-buy-box/buy1._V192207739_.gif" /&gt;&lt;/a&gt;
-                    </code>
-                </li>
-
-            </ul>
-            <p>Sooo, no problem with that?? If amazon allows this??</p>
-            <footer></footer>
-        </div>
-
-        <div id="page-8-3" class="step slide" data-x="-10500" data-y="5000" data-z="0" data-rotate-y="300">
-            <header>
-                <h3>How to prevent from CSRF?</h3>
-            </header>
-            <p>CSRF protection is especially important where the data/state of the application is changed</p>
-            <ul type="square">
-                <li>require user intaraction (enter a password again, somehow confirm, this is a real interaction)</li>
-                <li>use CSRF tokens in the Form (basically create a hash over the forms values and add that to a hidden field)</li>
-                <li>changing the state should be done via a POST request</li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-8-4" class="step slide" data-x="-10500" data-y="7500" data-z="0" data-rotate-y="300">
-            <header>
-                <h3>Excursion: CSRF-Tokens</h3>
-            </header>
-            <p>Any request that changes state should be protected</p>
-            <ul type="square">
-                <li>At session start generate a unique and large random string</li>
-                <li>add this token to the form
-                    <pre><code>&lt;form action="/transfer.do" method="post"&gt;
-    &lt;input type="hidden" name="CSRFToken" 
-    value="OWY4NmQwODE4ODRjN2Q2NTlhMmZlYWE...
-    wYzU1YWQwMTVhM2JmNGYxYjJiMGI4MjJjZDE1ZDZ...
-    MGYwMGEwOA=="&gt;
-    ...
-&lt;/form&gt;</code></pre>
-                </li>
-                <li>validate against this token every time a form gets submitted</li>
-                <li>if the validation fails, inform of a possible attack</li>
-            </ul>
-            <footer></footer>
-    </div>
-
-
-        <div id="page-7-0" class="title step slide" data-x="-4000" data-y="0" data-z="-2000" data-rotate-y="330">
-            <header>
-                <h3>
-                    Missing function level access control?<br/>
-                    and<br/>
-                    Insecure direct Object References?
-                </h3>
-            </header>
-            
-            <footer></footer>
-        </div>
-
-        <div id="page-7-1" class="step slide" data-x="-4000" data-y="-2500" data-z="-2000" data-rotate-y="330">
-            <header>
-                <h3>Explanation: missing function level access control</h3>
-            </header>
-            
-            <h2 class="header--bold">Missing function level access control?</h2>
-            <p>
-                Applications often <b>do not</b> protect application functions.<br/>
-                What should be available to an admin and not to a normal user is just hidden and not properly checked
-                if it as called by an admin. See <a href="http://localhost:3000/" target="_blank">OWASP Juice Shop</a>
-            </p>
-
-            <h2 class="header--bold">Insecure direct Object References</h2>
-            <p>
-                Database IDs and other identifiers are used within the application without any further 
-                checks or abstraction
-            </p>
-
-            <p>E.g. Show the admin overview as normal customer ...</p>
-
-            <footer></footer>
-        </div>
-
-        <div id="page-7-2" class="step slide" data-x="-4000" data-y="-5000" data-z="-2000" data-rotate-y="330">
-            <header>
-                <h3>Missing function level access control?</h3>
-            </header>
-            <div>
-                <ul>
-                    <li>always check on that (lots of frameworks help you with that)</li>
-                    <li>use aspect oriented feature if your language supports that</li>
-                    <li>try to leave as few things as possible to the developer (do stuff "behind the scenes")</li>
-                </ul>
-            </div>
-            <footer></footer>
-        </div>
-
-
-        <div id="page-7-3" class="step slide" data-x="-4000" data-y="-7500" data-z="-2000" data-rotate-y="330">
-            <header>
-                <h3>Missing function level access control?</h3>
-            </header>
-            <ul type="square">
-                <li>Authorization must be checked at each call</li>
-                <li>Languages that support this: use Aspect oriented weaving to implement this</li>
-                <li>use an Express Middleware to explicitly check for this</li>
-                <li>use a Perl Module automatically called by Apache to check for that</li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-7-4" class="step slide" data-x="-4000" data-y="-10000" data-z="-2000" data-rotate-y="330">
-                <header>
-                    <h3>Insecure direct Object References?</h3>
-                    <p>What can be done?</p>
-                </header>
-                <ul type="square">
-                    <li>Use session based ids, that are only valid within the session (mapping back and forth)</li>
-                    <li>check for access rights any time you fetch data (extra SQL)</li>
-                    <li>prefetch valid ids and check against these</li>
-                </ul>
-                <footer></footer>
-            </div>
-
-        <div id="page-6-0" class="title step slide" data-x="-2000" data-y="0" data-z="-4000" data-rotate-y="0">
-            <header>
-                <h3>Sensitive Data Exposure?</h3>
-            </header>
-            <footer></footer>
-        </div>
-
-        <div id="page-6-1" class="step slide" data-x="-2000" data-y="2500" data-z="-4000" data-rotate-y="0">
-            <header>
-                <h3>What is Sensitive Data Exposure?</h3>
-                <p>What kind of data do we speak here?</p>
-            </header>
-            <ul type="square">
-                <li>Usernames (or emails, passwords, ...)</li>
-                <li>Creditcard, banking infos, ...</li>
-                <li>Other systems hostnames, usernames, passwords</li>
-                <li>Backup Files of the application</li>
-                <li>Logfiles, System output, ...</li>
-                <li>Session IDs, Tokens ...</li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-6-2" class="step slide" data-x="-2000" data-y="5000" data-z="-4000" data-rotate-y="0">
-            <header>
-                <h3>Sensitive Data Exposure?</h3>
-                <p>How to prevent that?</p>
-            </header>
-            <div style="padding:0.75em 0.5em; background: rgba(192,192,192,0.666);border: 2px solid red; border-radius: 0.125em;">
-                Think Before You Store!
-            </div>
-            <ul type="square">
-                <li>SSL encrypt connections</li>
-                <li>Webroot and public available places <b>must not</b> contain sensitive data (Backups, Logs, ...)</li>
-                <li>hash passwords</li>
-                <li>protect sessions, check apache config</li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-6-3" class="step slide" data-x="-2000" data-y="7500" data-z="-4000" data-rotate-y="0">
-            <header>
-                <h3>Sensitive Data Exposure?</h3>
-            </header>
-            <ul type="square">
-                <li>Especially with Credit Card/Banking Data - dont store it</li>
-                <li>Outsource this to a specialist</li>
-                <li>If still you need to do it: Hire an expert!</li>
-                <li>Scan for this using tools like OWASP Zed Attack Proxy, Nikto, W3AF, ...</li>
-                <li>Scan regularily, before each deploy and on productive instances also</li>
-            </ul>
-            <footer></footer>
-        </div>
-
-        <div id="page-5-0" class="title step slide" data-x="0" data-y="0" data-z="-6000" data-rotate-y="-30">
-            <header>
-                <h3>Security Misconfiguration</h3>
-            </header>
-            <div style="position:absolute;top:1rem;right:1rem;"><img src="img/wylie_ski.jpg" alt=""></div>
-            <footer></footer>
-        </div>
-
-        <div id="page-5-1" class="step slide" data-x="0" data-y="2500" data-z="-6000" data-rotate-y="-30">
-            <header>
-                <h3>Security Misconfiguration?</h3>
-            </header>
-            <p>Like the greek hydra ... it has many heads to bite you</p>
-            <ul type="square">
-                <li data-jimpress="zoom" class="do-zoom will-zoom">
-                    Infrastructure <span data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">Networkadmins?</span>
-                </li>
-
-                <li data-jimpress="zoom" class="do-zoom will-zoom">
-                    Operating System Level <span data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">Sysadmins?</span>
-                </li>
-
-                <li data-jimpress="zoom" class="do-zoom will-zoom">
-                    Webserver Level <span data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">Webadmins!?</span>
-                </li>
-                
-                <li data-jimpress="zoom" class="do-zoom will-zoom">
-                    Database Level <span data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">DB Admins!?</span>
-                </li>
-                
-                <li data-jimpress="zoom" class="do-zoom will-zoom">
-                    Application Level 
-                    <span data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">
-                        <b style="color:darkred;font-weight:bold;">Developers!!!!!</b>
                     </span>
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
+                </section>
+                <section id="slide-34-2">
+                    <h2>Actions needed</h2>
 
-        <div id="page-5-2" class="step slide" data-x="0" data-y="5000" data-z="-6000" data-rotate-y="-30">
-            <header>
-                <h3>Security Misconfiguration?</h3>
-            </header>
-            <ul>
-                <li>
-                        often seen: Full stack traces (with filenames, paths, DB connections ...) 
-                        in production servers!!                        
-                </li>
-                <li>
-                        readable configuration files in the somewhere in the webserver root
-                </li>
-                <li>
-                        Implement best practices on how to configure DBs, Services, Libraries, ...
-                </li>
-            </ul>
+                    <ul>
+                        <li class="fragment">push for implementing a "central" logging server (ELK?)</li>
+                        <li class="fragment">push for a central monitoring</li>
+                        <li class="fragment">use a common logging library ...</li>
+                    </ul>
+                </section>
+            </section>
+            <!-- /easy wins -->
 
-            <footer></footer>
-        </div>
+            <!-- bad habits -->
 
-        <div id="page-5-3" class="step slide" data-x="0" data-y="75000" data-z="-6000" data-rotate-y="-30">
-            <header>
-                <h3>Security Misconfiguration - what can be done?</h3>
-            </header>
-            <ul type="square">
-                <li data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">
-                    use staging with configurations for each stage
-                </li>
-                <li data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">
-                    check regularily with security scanners
-                </li>
-                <li data-jimpress="fadeIn" class="do-fadeIn will-fadeIn">
-                    code reviews
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
+            <section class="chapter" data-background-image="img/bgs/lazy-programmer.webp"
+                data-background-position="90% 90%" data-background-size="30%">
 
-        
+                <h2>Bad habits?</h2>
 
-        <div id="page-3-0" class="title step slide" data-x="2000" data-y="0" data-z="-9000" data-rotate-y="-60">
+                <p>I dont have them ...</p>
 
-            <iframe style="margin-top: 0;margin-right: -35px;float: right;" width="672" height="378" src="https://www.youtube.com/embed/qLDCI0PVbsg" frameborder="0" allowfullscreen></iframe>                    
+                <p class="fragment">... I am just doing it like I always did</p>
+            </section>
 
-            <header>
-                    <h3 >Cross site scripting? XSS</h3>
-            </header>
+            <section id="sec-misconfig">
+                <section id="slide-20" class="chapter" data-background-image="img/bgs/wile_coyote.jpg"
+                    data-background-position="95% 5%" data-background-size="35%">
+                    <h2 style="background-color: rgba(32, 32, 32, 0.75);padding: 1rem 2rem;">
+                        Security
+                        <br />Misconfiguration
+                    </h2>
+                </section>
 
-            <footer></footer>
-        </div>
+                <section id="slide-21">
+                    <h2>Why is that my problem??</h2>
 
-        <div id="page-3-1" class="step slide" data-x="2000" data-y="-2500" data-z="-9000" data-rotate-y="-60">
-            <header>
-                <h3>Cross site scripting? XSS</h3>
-            </header>
-            <p>if someone can send data that is not from the application, but will be interpreted as if</p>
-            
-            <h4>Types of XSS</h4>
+                    <p>
+                        thats admin stuff ... I am a developer, I don't have to do that
+                        <span class="fragment">... but wait!!</span>
+                    </p>
 
-            <ul>
-                <li>Stored XSS - user input is stored in the application (in client or server)</li>
-                <li>Reflected XSS - user input is directly used in the application (on the server or client)</li>
-                <li>DOM based XSS (is a special case of client side XSS), where data from the dom is used to </li>
-            </ul>
 
-            <p>this can be any kind of script that is interpreted by the target (JS, VB, ...)</p>
 
-            <footer></footer>
-        </div>
+                    <ul>
+                        <li class="fragment">
+                            Error handling reveals stack traces or other overly informative error messages to users.
+                            <span class="fragment hl-red">on Prod!</span>
+                        </li>
+                        <li class="fragment">
+                            Unnecessary features are enabled or installed (default ports, services, pages, accounts,
+                            passwords ...) <span class="fragment hl-red">on Prod!</span>
+                        </li>
+                    </ul>
+                </section>
 
-        <div id="page-3-2" class="step slide" data-x="2000" data-y="-5000" data-z="-9000" data-rotate-y="-60">
-            <header>
-                <h3>Cross site scripting?</h3>
-            </header>
-            <h4>What can be done?</h4>
-            <ul type="square">
-                <li>Escape! Escape! Escape everything that gets into the Browser!!!</li>
-                <li>
-                    Context related escapes. Will the data be shown in HTML-Tags, 
-                    Attributes, Textareas, input values, URL-Parameters ...
-                </li>
+                <section id="slide-22">
+                    <h2>What to do?</h2>
 
-                <li>static code analysis, like Fisheye/Crucible</li>
-            </ul>
-            <footer></footer>
-        </div>
+                    <ul>
 
-        <div id="page-3-3" class="step slide" data-x="2000" data-y="0" data-z="-9000" data-rotate-y="-60">
-            <header>
-                <h3>Cross site scripting? Links</h3>
-            </header>
-            <ul type="square">
-                <li> 
-                    <a href="https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)">
-                        OWASP Top10 XSS
-                    </a> 
-                </li>
+                        <li class="fragment">use staging with configurations for each stage</li>
+                        <li class="fragment">check regularily with security scanners</li>
+                        <li class="fragment">code reviews</li>
+                    </ul>
+
+                </section>
+            </section>
+
+            <!-- /bad habits -->
+
+            <!-- injections -->
+
+            <section id="injection">
+
+                <section id="slide-05" class="chapter" data-background-image="./img/bgs/exploits_of_a_mom.png"
+                    data-background-size="66.66666%" data-background-position="80% 10%">
+
+                    <h3>Injection</h3>
+                    <h4>SQL, NoSQL, OS/Shell &amp; LDAP injection</h4>
+                </section>
+
+                <section id="slide-06">
+                    <h5>how does it work?</h5>
+
+                    <ul>
+                        <li>enter an SQL/LDAP/Shell command into a form (or send it to a service directly)</li>
+                        <li class="fragment" data-fragment-index="3">
+                            the command gets &quot;accidentally&quot; executed by the server
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            you gain access, see/download/delete... stuff you should not
+                        </li>
+                    </ul>
+
+                    <div class="mock-form fragment">
+                        <div>Login Form</div>
+                        <span>
+                            <label for="mock-search">user</label>
+                            <input type="search" name="search" id="mock-search" value="hahaha' OR 1 = 1 /*" />
+                        </span>
+                    </div>
+
+
+                </section>
+
+                <section id="slide-07">
+                    <h2>what to do against it</h2>
+
+                    <ul>
+                        <li>input sanitazation (whitelisting instead of blacklisting)</li>
+                        <li>escaping in SQL/HTML/...</li>
+                        <li>use Libraries functionality</li>
+                        <li>check your application with ZAP/Burp Suite ...</li>
+                    </ul>
+                    <p class="fragment hl-red">Use context aware sanitation and escaping</p>
+                </section>
+            </section>
+
+            <section id="xxe">
+                <section id="slide-14" class="chapter">
+                    <h2>XXE - XML external entities</h2>
+                </section>
+                <section id="slide-15">
+                    <h2>Where is this a problem?</h2>
+                    <ul>
+                        <li class="fragment">User Input gets written into XML (SOAP?)</li>
+                        <li class="fragment">SAML is used (XML based auth protocol for SSO)</li>
+                        <li class="fragment">XML files get processed by the application</li>
+                    </ul>
+
+                    <span class="fragment">
+                        <h2>How can this be exploited</h2>
+
+                        <textarea class="code"><!ENTITY xxe SYSTEM "file:///etc/passwd" >]></textarea><br />
+                        <textarea class="code"><!ENTITY xxe SYSTEM "file:///dev/random" >]></textarea>
+                    </span>
+                </section>
+                <section id="slide-16">
+                    <h2>What to do?</h2>
+
+                    <ul class="fragment">
+                        <li>switch off XXE</li>
+                        <li>input sanitazation (whitelisting instead of blacklisting)</li>
+                        <li>escape all user inputs</li>
+                        <li>to enforce: have regular code reviews</li>
+                        <li>check your application with ZAP/Burp Suite ...</li>
+                    </ul>
+                    <p class="fragment hl-red">Use context aware sanitation and escaping</p>
+                </section>
+            </section>
+
+            <section id="insec-serialization">
+                <section id="slide-26" class="chapter">
+                    <h2>Insecure Deserialization</h2>
+                </section>
+
+                <section id="slide-27">
+                    <h2>Why is this a problem?</h2>
+
+                    <p>Anytime we use user input in a serialized object or expose serialized data to the user (auth
+                        tokens)</p>
+
+                    <ul class="fragment">
+                        <li>HTTP cookies, HTML form parameters, API authentication tokens</li>
+                        <li>Caching serialized objects (that contain user input)</li>
+                        <li>Transferring Objects to other processes or over the wire (RPC/IPC)</li>
+                    </ul>
+
+                </section>
+
+                <section id="slide-28">
+                    <h2>What to do about this?</h2>
+
+                    <ul>
+                        <li>use integrity checks, sign serialized data and check the signature</li>
+                        <li>logging and monitoring deserialization exceptions</li>
+                        <li>strict type checking on deserialization (not enough - has already been circumvented) </li>
+                        <li>deserialize in low privilege environments (when possible)</li>
+                        <li>check your application with ZAP/Burp Suite ...</li>
+                    </ul>
+                    <p class="fragment hl-red">Use context aware sanitation and escaping</p>
+                </section>
+            </section>
+            <!-- /injections -->
+
+            <!--  -->
+            <section id="broken-auth">
+                <section id="slide-08" class="chapter" data-background-image="./img/bgs/broken-lock.jpg"
+                    data-background-size="45%" data-background-position="80% 10%">
+
+                    <h2>Broken Authentication</h2>
+
+                </section>
+
+                <section id="slide-09" data-autoslide="0">
+                    <h3>What does it mean?</h3>
+
+                    <p>when you ...</p>
+
+                    <ul>
+                        <li class="fragment">store passwords unencrypted</li>
+                        <li class="fragment">expose session IDs (in URLs?, to JS in Cookies?)</li>
+                        <li class="fragment">don't rotate session IDs after login (session fixation)</li>
+                        <li class="fragment">don't timeout/invalidate session IDs or use weak IDs</li>
+                        <li class="fragment">transmit authentication not on https</li>
+                    </ul>
+
+                </section>
+                <section id="slide-10">
+                    <h3>Mitigation</h3>
+
+                    <ul>
+                        <li class="fragment">sessionId storage: secure, httpOnly, sameSite and in cookie only</li>
+                        <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
+                        <li class="fragment">detect/prevent brute forcing</li>
+                        <li class="fragment">renew the sessionID after any privilege level change</li>
+                        <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
+                        <li class="fragment">provide a logout button</li>
+                        <li class="fragment">logging sessions lifecycle</li>
+                        <li class="fragment">btw: manage SessionIds just like any other user input</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section id="data-exposure">
+                <section id="slide-11" class="chapter"
+                    data-background-image="img/bgs/treasure-chest.jpg"
+                    data-background-size="40%"
+                    data-background-position="90% 90%">
+                    <h2>Data Exposure</h2>
+                </section>
+
+                <section id="slide-12">
+                    <h2>What data exposed to ...?</h2>
+
+                    <ul>
+                        <li class="fragment">Usernames (or emails, passwords, ...)</li>
+                        <li class="fragment">Creditcard, banking infos, ...</li>
+                        <li class="fragment">Other systems hostnames, usernames, passwords</li>
+                        <li class="fragment">Backup Files of the application</li>
+                        <li class="fragment">Logfiles, System output, ...</li>
+                        <li class="fragment">Session IDs, Tokens ...</li>
+                    </ul>
+                </section>
+
+                <section id="slide-13">
+                    <h2>How to prevent this?</h2>
+
+                    <p class="fragment" style="color:#d53868;text-align: center;">think before you store!</p>
+
+                    <ul>
+                        <li class="fragment">TLS encrypt connections</li>
+                        <li class="fragment">webroot ... <u>must not</u> contain backups, logs, ...</li>
+                        <li class="fragment">hash passwords</li>
+                        <li class="fragment">protect sessions (app &amp; webserver cfg)</li>
+                        <li class="fragment">especially Credit Card/Banking Data - don't store it (yourself)</li>
+                        <li class="fragment">scan with OWASP Zed Attack Proxy, Nikto, W3AF, ... </li>
+                        <li class="fragment">scan regularily, before each deploy and on PROD</li>
+
+                    </ul>
+                </section>
+            </section>
+
+            <section id="broken-access">
+
+                <section id="slide-17" class="chapter"
+                    data-background-image="img/bgs/shoplift.jpg">
+                    <h2 style="background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem; width: 66%;margin-left:25%;">Broken Access Control</h2>
+                </section>
+
+                <section id="slide-18">
+                    <h3>What is it?</h3>
                     
-                <li> 
-                    <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">
-                        OWASP XSS article from 2016
-                    </a> 
-                </li>
-                <li> 
-                    <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">
-                        OWASP XSS Prevention CHeat Sheet 
-                    </a>
-                </li>
+                    <h4 class="fragment">Missing function level access control?</h4>
+                    <span class="fragment">
 
-                <li> 
-                    <a href="https://www.owasp.org/index.php/Types_of_Cross-Site_Scripting">
-                        Types of XSS
-                    </a>
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
+                        <p>Applications often do not protect all functions/rest endpoints.</p>
 
-        <div id="page-2-0" class="title step slide" data-x="4000" data-y="0" data-z="-10500" data-rotate-y="-90">
-            <header>
-                <h3>Broken Authentication &amp; Session Management</h3>
-            </header>
+                        <p>
+                            What should be available to an admin and not to a normal user is just
+                            hidden and not properly checked if it as called by an admin.
+                        </p>
+                    </span>
 
-            <footer></footer>
-        </div>
+                    <h4 class="fragment">Insecure direct Object References</h4>
+                    <span class="fragment">
 
-        <div id="page-2-1" class="step slide" data-x="4000" data-y="2500" data-z="-10500" data-rotate-y="-90">
-            <header>
-                <h3>Broken Authentication &amp; Session Management</h3>
-            </header>
-            <ul type="square">
-                <li>
-                    User authentication/credentials aren’t protected when stored.
-                    See Sensitive Data Exposure.
-                </li>
-                <li>
-                    Passwords, session IDs, ... are sent over unencrypted connections. See
-                    Sensitive Data Exposure.
-                </li>
-                <li>
-                    Credentials can be guessed or overwritten (e.g., by weak account creation,
-                    change password, recover password, weak session IDs).
-                </li>
-                <li>
-                    Session IDs are exposed in the URL (e.g., URL rewriting).
-                </li>
-                <li>
-                    Session IDs don’t timeout, or
-                    single sign-on (SSO) tokens, aren’t properly invalidated during logout.
-                </li>
-                <li>
-                    Session IDs aren’t rotated after successful login.
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
+                        <p>
+                            Database IDs (...) are used without further checks or abstraction
+                            e.g. db ids in URLs (and you just count upwards)
+                        </p>
+                    </span>
 
-        <div id="page-2-2" class="step slide" data-x="4000" data-y="5000" data-z="-10500" data-rotate-y="-90">
-            <header>
-                <h3>Broken Authentication &amp; Session Management</h3>
-            </header>
-            <ul type="square">
-                <li>hash passwords, use SSL ....</li>
+                    <aside class="notes" data-markdown>
+                        - story holger accessing his ticket through url manipulation
+                        - pretty common imho
+                    </aside>
+                </section>
 
-                <li>regenerate session IDs regularily during sessions</li>
+                <section id="slide-19">
+                    <h2>And now what?</h2>
 
-                <li>secure cookies</li>
+                    <ul class="fragment">
+                        <li>authorization  must be cheked <b>in every function call</b></li>
+                        <li>use the builtin functionality of existing frameworks (check if they do!!)</li>
+                        <li>e.g. use aspect oriented features to catch more functions at once</li>
+                        <li>get help/code review exetnsively ...</li>
+                    </ul>
+                </section>
+            </section>
 
-                <li>https only</li>
+            <section id="xss">
+                <section id="slide-23" class="chapter">
+                    <h2>XSS &rarr; Cross Site Scripting</h2>
+                </section>
 
-                <li>CSRF</li>
+                <section id="slide-24">
+                    <h2>What is XSS? <a class="fragment" target="_blank" href="https://youtu.be/gaLtI0s06hI">This is</a></h2>
 
-                <li>ask the password again before doing something &quot;serious&quot;</li>
-            </ul>
-            <footer></footer>
-        </div>
+                    <p class="fragment">
+                        if someone can send data that is not from the application, but the client will use it as if<br/>
+                        this can be any kind of script that is interpreted by the client/target (JS, VB, ...)
+                    </p>
+                </section>
 
-        <div id="page-1-0" class="title step slide" data-x="9000" data-y="0" data-z="-9000" data-rotate-y="-120">
-            
-            <div style="float:right">
-                <img src="img/exploits_of_a_mom.png" height="280" alt="little bobby tables">
-            </div>
-            
-            <header>
-                <h3>Injection</h3>
-            </header>
-        
-            <footer></footer>
-        </div>
+                <section id="slide-25">
+                    <h2>What can be done?</h2>
 
-        <div id="page-1-1" class="step slide" data-x="9000" data-y="-2500" data-z="-9000" data-rotate-y="-120">
-            <header>
-                <h3>Injection</h3>
-            </header>
-            <p>
-                Input data into an application to modify the behaviour of the application.
-                Basically this is an attack on the different interpreters used in the application
-                architecture
-            </p>
+                    <img src="img/kirk-esacpes.jpg" style="display:block; width:28%; margin: 0.5rem auto;" />
 
-            <h3>Forms of injections</h3>
-            <ul>
-                <li>
-                    SQL Injection: &nbsp;<code>' OR 1 = 1 /*</code>
-                </li>
-                <li>
-                    LDAP Injection 
-                    <a href="https://www.owasp.org/index.php/LDAP_Injection_Prevention_Cheat_Sheet">Examples</a>
-                </li>
-                <li>
-                    PHP Injection
-                    <a href="https://www.owasp.org/index.php/PHP_Object_Injection">Examples</a>
-                </li>
-            </ul>
-            <footer></footer>
-        </div>
+                    <ul>
+                        <li class="fragment">Escape! Escape! Escape!!!
+                            Context related escapes!!!!
+                        </li>
+                        <li class="fragment">Get help from static code analysis, like Fisheye/Crucible, Sonar, ...</li>
+                    </ul>
+                    <aside class="notes" data-markdown>
+                        from can user input come from?
+                        - dbs
+                        - service endpoints
+                        where does the user input show up?
+                        - Textareas
+                        - input values
+                        - URL-Parameters
+                        - css
+                    </aside>
+                </section>
+            </section>
 
-        <div id="page-1-2" class="step slide" data-x="9000" data-y="-5000" data-z="-9000" data-rotate-y="-120">
-            <header>
-                <h3>Injection</h3>
-            </header>
-            <h3 class="header--bold">What to do</h3>
-            <ul type="square">
-                <li>Always filter inputs</li>
-                <li>Think what kind of escaping is needed</li>
-                <li>Wherever possible: work with whitelists, not blacklists</li>
-                <li>Check any external ressource (Example DNS website, Facebook games, MP3 Players ...)</li>
-            </ul>
-            <h4 class="header--bold">Nice to knows</h4>
-            <ul>
-                <li>
-                    <a href="http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/">SQL Injection Hall of Shame</a>
-                </li>
-            </ul>
+            <section id="wrapup">
+                <section id="slide-35" class="chapter">
+                    <h2>What else?</h2>
 
-            <footer></footer>
-        </div>
+                    <aside class="notes" data-markdown>
+                        what were you running into?
 
-        <div id="page-1-3" class="step slide" data-x="9000" data-y="-7500" data-z="-9000" data-rotate-y="-120">
-            <header>
-                <h3>Injection</h3>
-            </header>
-            <div>
-                    <li>Filter all inputs</li>
-                    <li>Use whitelists instead of blacklists</li>
-                    <li>Use specific escaping aware of context and usecase</li>
-                </ul>
-            </div>
-            <footer></footer>
-        </div>
+                        how did you solve that?
+                    </aside>
+                </section>
 
-        <div id="page-wrapup" class=" step slide" data-x="10500" data-y="0" data-z="-4000" data-rotate-y="-150">
-            <header>
-                <h2>Wrapup -<br/>what now?</h2>
-            </header>
-            <div>
-                <h3 class="header--bold">What to take away from this</h3>
-                <ul>
-                    <li>Dont post naked photos of yourself on the internet?</li>
-                    <li>... what else???</li>
-                </ul>
-                
-            </div>
-            <footer></footer>
-        </div>
-        
-        <div id="page-wrapup-1" class="step slide" data-x="10500" data-y="2500" data-z="-4000" data-rotate-y="-150">
-            <header>
-                <h3>What to do</h3>
-            </header>
-            <div>
-                <ul>
-                    <li>Check regularily on updates</li>
-                    <li>develop with security in mind (security by design)</li>
-                    <li>use common practices (CSRF tokens, redirect checks, escape methods)</li>
-                    <li>implement the tools to help you with this in your daily processes</li>
-                </ul>
-                
-            </div>
-        </div>
+                <section id="slide-36">
+                    <h2>My Proposals</h2>
+                    <ul>
+                        <li class="fragment">Code Reviews, Code Reviews, Code Reviews</li>
+                        <li class="fragment">Define Standards</li>
+                        <li class="fragment">Define your Workflows <b class="hl-green">with security in mind</b></li>
+                        <li class="fragment">Stick to your workflows (each team member has to remind every other team member)</li>
+                        <li class="fragment">Say "No!" to time pressure</li>
+                        <li class="fragment">Run automatted security tests as often as possible</li>
+                    </ul>
 
-        <div id="page-wrapup-2" class="step slide" data-x="10500" data-y="5000" data-z="-4000" data-rotate-y="-150">
-            <header>
-                <h3>What is already in place?</h3>
-            </header>
+                    <aside class="notes" data-markdown>
+                        code reviews that
+                        - look for escapes
+                        - that look where user input is coming from
+                        - if xxe is enabled
+                    </aside>
+                </section>
+            </section>
 
-            <ul>
-                <li>
-                    Code Reviews<br/>
-                    Use extensively!!!
-                </li>
-                <li>
-                    Fisheye / Crucible<br/>
-                    Should be enabled by default in any project
-                </li>
-                <li>
-                    Scanning of webapps<br/>
-                    prepared right now, automattic scanning in Bamboo/Jenkins
-                </li>
-                <li>
-                    use Dependency Security Checkers (NSP, ...)
-                </li>
-                <li>
-                    discuss with others (architects, developers, ...) before you implement
-                </li>
-            </ul>
-        </div>
-
-        <div id="final" class="step slide" data-x="0" data-y="20000" data-z="9999" data-rotate-y="0">
-            <header>
-                <h1></h1>
-            </header>
-            <h1 align="center">thank you!</h1>
+            <section id="thx">
+                <section id="last" class="chapter">
+                    <h2>Thank you for your patience</h2>
+                </section>
+            </section>
         </div>
     </div>
-    <script type="text/javascript">
-        $.jmpress('register', 'owasp-top10', function () {
 
-            var jmpress = this;
-            // our main configuration
-            var config = {
-                viewPort: {
-                    height: 850,
-                    maxScale: 4,
-                    initalScale: 1,
-                    zoomable: false
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+
+            width: 1124,
+            height: 820,
+            progress: true,
+            fragmentInURL: true,
+            controlsTutorial: false,
+            controlsLayout: 'edges',
+            slideNumber: true,
+            // parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg",
+            history: true,
+            loop: false,
+            help: true, // false => for presentation
+            // showNotes: true, // false => for presentation
+
+
+            dependencies: [{
+                    src: 'plugin/markdown/marked.js'
+                },
+                {
+                    src: 'plugin/markdown/markdown.js'
+                },
+                {
+                    src: 'plugin/notes/notes.js',
+                    async: true
+                },
+                {
+                    src: 'plugin/highlight/highlight.js',
+                    async: true,
+                    callback: () => hljs.initHighlightingOnLoad()
                 }
-            };
-
-            // enable ESC to toggle jmpress
-            $(this).jmpress('toggle', 27, config, true);
-
-
+            ]
         });
-        $('#impress').jmpress('owasp-top10');
-
     </script>
 </body>
 

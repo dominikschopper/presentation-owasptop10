@@ -1,4 +1,25 @@
-.vscode
+.idea/
+*.iml
+*.iws
+*.eml
+out/
 .DS_Store
 **/.DS_Store
-node_modules
+.svn
+log/*.log
+tmp/**
+node_modules/
+package-lock.json
+.sass-cache
+css/reveal.min.css
+js/reveal.min.js
+css/default.css
+css/bisnode-defaults.css
+jmpress/animate-animations.css
+jmpress/basic-animations.css
+jmpress/bootstrap.min.css
+jmpress/jmpress.all.js
+jmpress/jquery.js
+docker/.data
+docker/OWASP_Juice_Shop*.zip
+proposed schedule.pdf

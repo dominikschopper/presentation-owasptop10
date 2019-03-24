@@ -1,0 +1,100 @@
+version: '3'
+services: 
+
+  # juiceshop1:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-01
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3001:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
+
+  # juiceshop2:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-02
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3002:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
+
+  # juiceshop3:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-03
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3003:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
+
+  ctfd:
+    build: 
+      context: ./ctfd
+    container_name: ctfd-js
+    ports: 
+      - 8088:8000
+    restart: unless-stopped
+    environment:
+      - UPLOAD_FOLDER=/var/uploads
+      - DATABASE_URL=mysql+pymysql://root:ctfd@db/ctfd
+      - REDIS_URL=redis://cache:6379
+      - WORKERS=1
+      - LOG_FOLDER=/var/log/CTFd
+      - ACCESS_LOG=-
+      - ERROR_LOG=-
+      - SECRET_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+    volumes:
+      - ./ctfd/.data/CTFd/logs:/var/log/CTFd
+      - ./ctfd/.data/CTFd/uploads:/var/uploads
+      - ./ctfd:/opt/CTFd:ro
+    depends_on:
+      - db
+    networks:
+        default-ctf:
+        internal-ctf:
+
+  db:
+    image: mariadb:10.4
+    restart: unless-stopped
+    container_name: ctfd-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=ctfd
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=ctfd
+    volumes:
+      - .data/mysql:/var/lib/mysql
+    networks:
+        internal-ctf:
+    # This command is required to set important mariadb defaults
+    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
+
+  cache:
+    image: redis:4
+    container_name: ctfd-redis
+    restart: unless-stopped
+    volumes:
+    - .data/redis:/data
+    networks:
+        internal-ctf:
+
+networks:
+    default-ctf:
+    internal-ctf:
+        internal: true
+
+
+
+
