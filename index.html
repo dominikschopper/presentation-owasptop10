@@ -81,7 +81,7 @@
                     - security is too important to leave it to the specialists
                     - i am not saying I always do all of the things I am stating here
                     - gdpr made it come forward, but I started this before that
-                    
+
                     **but i try** - **very hard to do that**
                 </aside>
             </section>
@@ -142,10 +142,7 @@
                                 Security Misconfiguration
                             </li>
                             <li data-autoslide="500" class="fragment" style="line-height:1rem;">
-                                XSS (Cross Site Scripting)<br />
-                                <span style="font-size:1rem;color:grey;">
-                                    https://www.youtube.com/watch?v=u4uq0p2YAdk
-                                </span>
+                                XSS (Cross Site Scripting)
                             </li>
                             <li data-autoslide="500" class="fragment">
                                 Insecure Deserialization
@@ -178,9 +175,9 @@
                 </span>
 
                 <aside class="notes" data-markdown>
-                    grouping stuff
+                    I wanted to group stuff
 
-                    first group is pretty clear to everybody, lets just skip over the points
+                    first group is pretty clear to everybody ... and still it gets forgotten/left out ...
                 </aside>
             </section>
 
@@ -278,7 +275,6 @@
             <!-- /easy wins -->
 
             <!-- bad habits -->
-
             <section class="chapter" data-background-image="img/bgs/lazy-programmer.webp"
                 data-background-position="90% 90%" data-background-size="30%">
 
@@ -287,6 +283,86 @@
                 <p>I dont have them ...</p>
 
                 <p class="fragment">... I am just doing it like I always did</p>
+            </section>
+
+            <section id="broken-auth">
+                <section id="slide-08" class="chapter" data-background-image="./img/bgs/broken-lock.jpg"
+                    data-background-size="45%" data-background-position="80% 10%">
+
+                    <h2>Broken Authentication</h2>
+
+                </section>
+
+                <section id="slide-09" data-autoslide="0">
+                    <h3>What does it mean?</h3>
+
+                    <p>when you ...</p>
+
+                    <ul>
+                        <li class="fragment">store passwords unencrypted</li>
+                        <li class="fragment">expose session IDs (in URLs?, to JS in Cookies?)</li>
+                        <li class="fragment">don't rotate session IDs after login (session fixation)</li>
+                        <li class="fragment">don't timeout/invalidate session IDs or use weak IDs</li>
+                        <li class="fragment">transmit authentication not on https</li>
+                    </ul>
+
+                </section>
+                <section id="slide-10">
+                    <h3>Mitigation</h3>
+
+                    <ul>
+                        <li class="fragment">sessionId storage: secure, httpOnly, sameSite and in cookie only</li>
+                        <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
+                        <li class="fragment">detect/prevent brute forcing</li>
+                        <li class="fragment">renew the sessionID after any privilege level change</li>
+                        <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
+                        <li class="fragment">provide a logout button</li>
+                        <li class="fragment">logging sessions lifecycle</li>
+                        <li class="fragment">btw: manage SessionIds just like any other user input</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section id="data-exposure">
+                <section id="slide-11" class="chapter" data-background-image="img/bgs/treasure-chest.jpg"
+                    data-background-size="40%" data-background-position="90% 90%">
+                    <h2>Sensitive Data Exposure</h2>
+                </section>
+
+                <section id="slide-12">
+                    <h2>What data exposed to ...?</h2>
+
+                    <ul>
+                        <li class="fragment">Usernames (or emails, passwords, ...)</li>
+                        <li class="fragment">Creditcard, banking infos, ...</li>
+                        <li class="fragment">Other systems hostnames, usernames, passwords</li>
+                        <li class="fragment">Backup Files of the application</li>
+                        <li class="fragment">Logfiles, System output, ...</li>
+                        <li class="fragment">Session IDs, Tokens ...</li>
+                    </ul>
+
+                    <aside class="notes" data-markdown>
+                        - even hashed passwords can be retrieved with rainbow tables [Rainbow
+                        Tables](https://crackstation.net/)
+                    </aside>
+                </section>
+
+                <section id="slide-13">
+                    <h2>How to prevent this?</h2>
+
+                    <p class="fragment" style="color:#d53868;text-align: center;">think before you store!</p>
+
+                    <ul>
+                        <li class="fragment">TLS encrypt connections</li>
+                        <li class="fragment">webroot ... <u>must not</u> contain backups, logs, ...</li>
+                        <li class="fragment">hash passwords</li>
+                        <li class="fragment">protect sessions (app &amp; webserver cfg)</li>
+                        <li class="fragment">especially Credit Card/Banking Data - don't store it (yourself)</li>
+                        <li class="fragment">scan with OWASP Zed Attack Proxy, Nikto, W3AF, ... </li>
+                        <li class="fragment">scan regularily, before each deploy and on PROD</li>
+
+                    </ul>
+                </section>
             </section>
 
             <section id="sec-misconfig">
@@ -333,14 +409,61 @@
                 </section>
             </section>
 
+
+            <section id="broken-access">
+
+                <section id="slide-17" class="chapter" data-background-image="img/bgs/shoplift.jpg">
+                    <h2 style="background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem; width: 66%;margin-left:25%;">
+                        Broken Access Control</h2>
+                </section>
+
+                <section id="slide-18">
+                    <h3>What is it?</h3>
+
+                    <h4 class="fragment">Missing function level access control?</h4>
+                    <span class="fragment">
+
+                        <p>Applications often do not protect all functions/rest endpoints.</p>
+
+                        <p>
+                            What should be available to an admin and not to a normal user is just
+                            hidden and not properly checked if it as called by an admin.
+                        </p>
+                    </span>
+
+                    <h4 class="fragment">Insecure direct Object References</h4>
+                    <span class="fragment">
+
+                        <p>
+                            Database IDs (...) are used without further checks or abstraction
+                            e.g. db ids in URLs (and you just count upwards)
+                        </p>
+                    </span>
+
+                    <aside class="notes" data-markdown>
+                        - story holger accessing his ticket through url manipulation
+                        - pretty common imho
+                    </aside>
+                </section>
+
+                <section id="slide-19">
+                    <h2>And now what?</h2>
+
+                    <ul class="fragment">
+                        <li>authorization must be cheked <b>in every function call</b></li>
+                        <li>use the builtin functionality of existing frameworks (check if they do!!)</li>
+                        <li>e.g. use aspect oriented features to catch more functions at once</li>
+                        <li>get help/code review exetnsively ...</li>
+                    </ul>
+                </section>
+            </section>
             <!-- /bad habits -->
 
             <!-- injections -->
-
             <section id="injection">
 
-                <section class="chapter" id="injects-title"
-                    data-background-image="img/bgs/many-injections.jpg">
+                <section class="chapter" id="injects-title" data-background-image="img/bgs/many-injections.jpg"
+                    data-background-size="25%" data-background-position="90% 90%">
                     <h2>all kinds of injections</h2>
                 </section>
 
@@ -367,8 +490,16 @@
                     <div class="mock-form fragment">
                         <div>Login Form</div>
                         <span>
-                            <label for="mock-search">user</label>
-                            <input type="search" name="search" id="mock-search" value="hahaha' OR 1 = 1 /*" />
+                            <label for="mock-search-1">user</label>
+                            <input type="search" name="search" id="mock-search-1" value="@bisnode.com" />
+                        </span>
+                    </div>
+
+                    <div class="mock-form fragment">
+                        <div>Login Form</div>
+                        <span>
+                            <label for="mock-search-2">user</label>
+                            <input type="search" name="search" id="mock-search-2" value="' OR 1 = 1 /*" />
                         </span>
                     </div>
 
@@ -379,11 +510,12 @@
                     <h2>what to do against it</h2>
 
                     <ul>
-                        <li>input sanitazation (whitelisting instead of blacklisting)</li>
-                        <li>escaping in SQL/HTML/...</li>
-                        <li>use Libraries functionality</li>
-                        <li>check your application with ZAP/Burp Suite ...</li>
+                        <li class="fragment">input sanitazation (whitelisting instead of blacklisting)</li>
+                        <li class="fragment">escaping in SQL/HTML/...</li>
+                        <li class="fragment">use Libraries functionality</li>
+                        <li class="fragment">check your application with ZAP/Burp Suite ...</li>
                     </ul>
+
                     <p class="fragment hl-red">Use context aware sanitation and escaping</p>
                 </section>
             </section>
@@ -407,6 +539,7 @@
                         <textarea class="code"><!ENTITY xxe SYSTEM "file:///dev/random" >]></textarea>
                     </span>
                 </section>
+
                 <section id="slide-16">
                     <h2>What to do?</h2>
 
@@ -455,148 +588,43 @@
             </section>
             <!-- /injections -->
 
-            <!--  -->
-            <section id="broken-auth">
-                <section id="slide-08" class="chapter" data-background-image="./img/bgs/broken-lock.jpg"
-                    data-background-size="45%" data-background-position="80% 10%">
-
-                    <h2>Broken Authentication</h2>
-
-                </section>
-
-                <section id="slide-09" data-autoslide="0">
-                    <h3>What does it mean?</h3>
-
-                    <p>when you ...</p>
-
-                    <ul>
-                        <li class="fragment">store passwords unencrypted</li>
-                        <li class="fragment">expose session IDs (in URLs?, to JS in Cookies?)</li>
-                        <li class="fragment">don't rotate session IDs after login (session fixation)</li>
-                        <li class="fragment">don't timeout/invalidate session IDs or use weak IDs</li>
-                        <li class="fragment">transmit authentication not on https</li>
-                    </ul>
-
-                </section>
-                <section id="slide-10">
-                    <h3>Mitigation</h3>
-
-                    <ul>
-                        <li class="fragment">sessionId storage: secure, httpOnly, sameSite and in cookie only</li>
-                        <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
-                        <li class="fragment">detect/prevent brute forcing</li>
-                        <li class="fragment">renew the sessionID after any privilege level change</li>
-                        <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
-                        <li class="fragment">provide a logout button</li>
-                        <li class="fragment">logging sessions lifecycle</li>
-                        <li class="fragment">btw: manage SessionIds just like any other user input</li>
-                    </ul>
-                </section>
-            </section>
-
-            <section id="data-exposure">
-                <section id="slide-11" class="chapter"
-                    data-background-image="img/bgs/treasure-chest.jpg"
-                    data-background-size="40%"
-                    data-background-position="90% 90%">
-                    <h2>Sensitive Data Exposure</h2>
-                </section>
-
-                <section id="slide-12">
-                    <h2>What data exposed to ...?</h2>
-
-                    <ul>
-                        <li class="fragment">Usernames (or emails, passwords, ...)</li>
-                        <li class="fragment">Creditcard, banking infos, ...</li>
-                        <li class="fragment">Other systems hostnames, usernames, passwords</li>
-                        <li class="fragment">Backup Files of the application</li>
-                        <li class="fragment">Logfiles, System output, ...</li>
-                        <li class="fragment">Session IDs, Tokens ...</li>
-                    </ul>
-
-                    <aside class="notes" data-markdown>
-                        - even hashed passwords can be retrieved with rainbow tables [Rainbow Tables](https://crackstation.net/)
-                    </aside>
-                </section>
-
-                <section id="slide-13">
-                    <h2>How to prevent this?</h2>
-
-                    <p class="fragment" style="color:#d53868;text-align: center;">think before you store!</p>
-
-                    <ul>
-                        <li class="fragment">TLS encrypt connections</li>
-                        <li class="fragment">webroot ... <u>must not</u> contain backups, logs, ...</li>
-                        <li class="fragment">hash passwords</li>
-                        <li class="fragment">protect sessions (app &amp; webserver cfg)</li>
-                        <li class="fragment">especially Credit Card/Banking Data - don't store it (yourself)</li>
-                        <li class="fragment">scan with OWASP Zed Attack Proxy, Nikto, W3AF, ... </li>
-                        <li class="fragment">scan regularily, before each deploy and on PROD</li>
-
-                    </ul>
-                </section>
-            </section>
-
-            <section id="broken-access">
-
-                <section id="slide-17" class="chapter"
-                    data-background-image="img/bgs/shoplift.jpg">
-                    <h2 style="background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem; width: 66%;margin-left:25%;">Broken Access Control</h2>
-                </section>
-
-                <section id="slide-18">
-                    <h3>What is it?</h3>
-                    
-                    <h4 class="fragment">Missing function level access control?</h4>
-                    <span class="fragment">
-
-                        <p>Applications often do not protect all functions/rest endpoints.</p>
-
-                        <p>
-                            What should be available to an admin and not to a normal user is just
-                            hidden and not properly checked if it as called by an admin.
-                        </p>
-                    </span>
-
-                    <h4 class="fragment">Insecure direct Object References</h4>
-                    <span class="fragment">
-
-                        <p>
-                            Database IDs (...) are used without further checks or abstraction
-                            e.g. db ids in URLs (and you just count upwards)
-                        </p>
-                    </span>
-
-                    <aside class="notes" data-markdown>
-                        - story holger accessing his ticket through url manipulation
-                        - pretty common imho
-                    </aside>
-                </section>
-
-                <section id="slide-19">
-                    <h2>And now what?</h2>
-
-                    <ul class="fragment">
-                        <li>authorization  must be cheked <b>in every function call</b></li>
-                        <li>use the builtin functionality of existing frameworks (check if they do!!)</li>
-                        <li>e.g. use aspect oriented features to catch more functions at once</li>
-                        <li>get help/code review exetnsively ...</li>
-                    </ul>
-                </section>
-            </section>
-
             <section id="xss">
                 <section id="slide-23" class="chapter">
                     <h2>XSS &rarr; Cross Site Scripting</h2>
                 </section>
 
                 <section id="slide-24">
-                    <h2>What is XSS? <a class="fragment" target="_blank" href="https://youtu.be/gaLtI0s06hI">This is</a></h2>
+                    <h2>What is XSS? <a class="fragment" target="_blank" href="https://youtu.be/gaLtI0s06hI">This is</a>
+                    </h2>
 
                     <p class="fragment">
-                        if someone can send data that is not from the application, but the client will use it as if<br/>
-                        this can be any kind of script that is interpreted by the client/target (JS, VB, ...)
+                        if someone can send data that is not from the application, but the client
+                        will use it as if
                     </p>
+
+                </section>
+
+                <section id="slide-24-2">
+                    <h3>examples of XSS</h3>
+
+                    <div class="mock-form fragment">
+                        <div>Search Form</div>
+                        <span>
+                            <label for="mock-search-3">search</label>
+                            <input type="search" name="search" id="mock-search-3" value="iphone" />
+                        </span>
+                        <div style="color:black">your result for <span class="hl-red">iphone</span></div>
+                    </div>
+
+
+                    <div class="mock-form fragment">
+                        <div>Registration</div>
+                        <span>
+                            <label for="mock-search-4">Name</label>
+                            <input type="search" name="search" id="mock-search-4"
+                                value="dom <script>alert('X')</script>" />
+                        </span>
+                    </div>
                 </section>
 
                 <section id="slide-25">
@@ -605,11 +633,10 @@
                     <img src="img/kirk-esacpes.jpg" style="display:block; width:28%; margin: 0.5rem auto;" />
 
                     <ul>
-                        <li class="fragment">Escape! Escape! Escape!!!
-                            Context related escapes!!!!
-                        </li>
+                        <li class="fragment">Escape! Escape! Escape!!! Context related escapes!!!! </li>
                         <li class="fragment">Get help from static code analysis, like Fisheye/Crucible, Sonar, ...</li>
                     </ul>
+
                     <aside class="notes" data-markdown>
                         from can user input come from?
                         - dbs
@@ -640,7 +667,8 @@
                         <li class="fragment">Code Reviews, Code Reviews, Code Reviews</li>
                         <li class="fragment">Define Standards</li>
                         <li class="fragment">Define your Workflows <b class="hl-green">with security in mind</b></li>
-                        <li class="fragment">Stick to your workflows (each team member has to remind every other team member)</li>
+                        <li class="fragment">Stick to your workflows (each team member has to remind every other team
+                            member)</li>
                         <li class="fragment">Say "No!" to time pressure</li>
                         <li class="fragment">Run automatted security tests as often as possible</li>
                     </ul>

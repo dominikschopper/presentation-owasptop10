@@ -49,19 +49,19 @@ html body .reveal section h3 {
     font-family: bisnode-sans, Arial, Helvetica, sans-serif;
 }
 
-html body .reveal .chapter h1 {
-    color: #d53868;
-}
-
-html body .reveal .chapter h2 {
+html body .reveal section h1 {
     color: #329e98;  
 }
 
-html body .reveal .chapter h3 {
+html body .reveal section h2 {
+    color: #d53868;
+}
+
+html body .reveal section h3 {
     color: #d59e38;
 }
 
-html body .reveal .chapter h4 {
+html body .reveal section h4 {
     color: rgb(108, 129, 201); /* rgb(72, 86, 134) */
 }
 
