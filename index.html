@@ -75,6 +75,15 @@
                 data-background-position="95% 5%">
                 <h1 class="">OWASP Top10</h1>
                 <h3 class="hl-red">developers worst nightmare???</h3>
+
+                <aside class="notes">
+                    - i am a developer, not a sec specialist
+                    - security is too important to leave it to the specialists
+                    - i am not saying I always do all of the things I am stating here
+                    - gdpr made it come forward, but I started this before that
+                    
+                    **but i try** - **very hard to do that**
+                </aside>
             </section>
 
             <section class="slidegroup-intro">
@@ -167,6 +176,12 @@
                         <li>do more for the environment ...</li>
                     </ul>
                 </span>
+
+                <aside class="notes" data-markdown>
+                    grouping stuff
+
+                    first group is pretty clear to everybody, lets just skip over the points
+                </aside>
             </section>
 
             <section id="known-vulnerabs">
@@ -324,6 +339,11 @@
 
             <section id="injection">
 
+                <section class="chapter" id="injects-title"
+                    data-background-image="img/bgs/many-injections.jpg">
+                    <h2>all kinds of injections</h2>
+                </section>
+
                 <section id="slide-05" class="chapter" data-background-image="./img/bgs/exploits_of_a_mom.png"
                     data-background-size="66.66666%" data-background-position="80% 10%">
 
@@ -479,7 +499,7 @@
                     data-background-image="img/bgs/treasure-chest.jpg"
                     data-background-size="40%"
                     data-background-position="90% 90%">
-                    <h2>Data Exposure</h2>
+                    <h2>Sensitive Data Exposure</h2>
                 </section>
 
                 <section id="slide-12">
@@ -493,6 +513,10 @@
                         <li class="fragment">Logfiles, System output, ...</li>
                         <li class="fragment">Session IDs, Tokens ...</li>
                     </ul>
+
+                    <aside class="notes" data-markdown>
+                        - even hashed passwords can be retrieved with rainbow tables [Rainbow Tables](https://crackstation.net/)
+                    </aside>
                 </section>
 
                 <section id="slide-13">
