@@ -131,9 +131,9 @@ services:
         default-ctf:
         internal-ctf:
 
-
-
-
+# --------------------
+# CTF below here
+# --------------------
 
   ctfd:
     build: 
