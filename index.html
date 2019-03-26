@@ -545,7 +545,7 @@
 
                 <section id="slide-06-xmp">
 
-                <pre><code class="sql">
+                    <pre><code class="sql">
                     SELECT * FROM `users` WHERE username = ? AND PASSWORD = MD5(CONCAT(?, ?))
                 </code></pre>
                     <div class="fragment mock-form">
@@ -581,7 +581,7 @@
                     <ul>
                         <li class="fragment">input sanitation (whitelisting instead of blacklisting)</li>
                         <li class="fragment">escaping in SQL/HTML/...</li>
-                        <li class="fragment">use Libraries functionality</li>
+                        <li class="fragment">use Libraries functionality (symfony, django, hibernate, ...)</li>
                         <li class="fragment">check your application with ZAP/Burp Suite ...</li>
                     </ul>
 
@@ -593,6 +593,23 @@
                 <section id="slide-14" class="chapter">
                     <h2>XXE - XML external entities</h2>
                 </section>
+
+                <section id="slide-15-xmp">
+                    <pre><code class="xml">
+                    &lt;?xml version="1.0" encoding="ISO-8859-1"?>&lt;!DOCTYPE foo [
+                    &lt;!ELEMENT foo ANY >
+                    &lt;!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+                    &lt;foo>&xxe;&lt;/foo>
+                    </code></pre>
+
+                    <pre><code class="xml">
+                    &lt;?xml version="1.0" encoding="ISO-8859-1"?>&lt;!DOCTYPE foo [
+                    &lt;!ELEMENT foo ANY >
+                    &lt;!ENTITY xxe SYSTEM "file:///dev/random" >]>
+                    &lt;foo>&xxe;&lt;/foo>
+                    </code></pre>
+                </section>
+
                 <section id="slide-15">
                     <h2>Where is this a problem?</h2>
                     <ul>
@@ -600,21 +617,17 @@
                         <li class="fragment">SAML is used (XML based auth protocol for SSO)</li>
                         <li class="fragment">XML files get processed by the application</li>
                     </ul>
-
-                    <span class="fragment">
-                        <h2>How can this be exploited</h2>
-
-                        <textarea class="code"><!ENTITY xxe SYSTEM "file:///etc/passwd" >]></textarea><br />
-                        <textarea class="code"><!ENTITY xxe SYSTEM "file:///dev/random" >]></textarea>
-                    </span>
                 </section>
 
                 <section id="slide-16">
                     <h2>What to do?</h2>
 
                     <ul class="fragment">
-                        <li>switch off XXE</li>
+                        <li>switch off XXE &rarr; <a target="_blank"
+                                href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.md">XXE
+                                Prevention</a></li>
                         <li>input sanitazation (whitelisting instead of blacklisting)</li>
+                        <li>XML Validation</li>
                         <li>escape all user inputs</li>
                         <li>to enforce: have regular code reviews</li>
                         <li>check your application with ZAP/Burp Suite ...</li>
@@ -667,7 +680,7 @@
                     </h2>
 
                     <p class="fragment">
-                        if someone can send data that is not from the application, but the client
+                        if someone can send data that is not from the application, but the client (browser)
                         will use it as if
                     </p>
 
@@ -696,14 +709,19 @@
                     </div>
                 </section>
 
+
                 <section id="slide-25">
                     <h2>What can be done?</h2>
 
                     <img src="img/kirk-esacpes.jpg" style="display:block; width:28%; margin: 0.5rem auto;" />
 
                     <ul>
-                        <li class="fragment">Escape! Escape! Escape!!! Context related escapes!!!! </li>
+                        <li class="fragment" data-autoslide="1000">Escape! Escape! Escape!!! 
+                            <span class="fragment" data-autoslide="0">Context related escapes!!!!</span>
+                        </li>
                         <li class="fragment">Get help from static code analysis, like Fisheye/Crucible, Sonar, ...</li>
+                        <li class="fragment">don't use innerHTML</li>
+                        <li class="fragment">NG: use DomSanitizer, dont bypassSecurity</li>
                     </ul>
 
                     <aside class="notes" data-markdown>
