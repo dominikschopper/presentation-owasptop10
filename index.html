@@ -32,12 +32,14 @@
             padding: 1rem 2rem;
             margin: 1rem auto;
             background-color: rgba(255, 255, 255, 0.9);
+            text-align: left;
         }
 
         .mock-form label {
             display: inline-block;
             margin: 1rem 2rem 1rem 0;
             color: #323232;
+            width: 33%;
         }
 
         .mock-form input {
@@ -230,6 +232,19 @@
                     <h2>Insufficent Logging &amp; Monitoring</h2>
                 </section>
 
+                <section id="slide-33-xmp">
+                    <pre class="fragment"><code class="js">
+                try {
+                    coLogin.auth(cred);
+                } catch (err) {
+                    logger.warn('Ooops! Could not login');
+                }
+                </code></pre>
+                    <pre class="fragment"><code class="perl">
+                    dnbToolkitSearch(term) || warn 'Not found!';
+                </code></pre>
+                </section>
+
                 <section id="slide-33">
                     <h2>Logging? Sure we do that!</h2>
 
@@ -266,7 +281,7 @@
                     <h2>Actions needed</h2>
 
                     <ul>
-                        <li class="fragment">push for implementing a "central" logging server (ELK?)</li>
+                        <li class="fragment">push for implementing a "central" logging server for everything (ELK?)</li>
                         <li class="fragment">push for a central monitoring</li>
                         <li class="fragment">use a common logging library ...</li>
                     </ul>
@@ -276,52 +291,68 @@
 
             <!-- bad habits -->
             <section class="chapter" data-background-image="img/bgs/lazy-programmer.webp"
-                data-background-position="90% 90%" data-background-size="30%">
+                data-background-position="90% 5%" data-background-size="30%">
 
                 <h2>Bad habits?</h2>
 
                 <p>I dont have them ...</p>
 
-                <p class="fragment">... I am just doing it like I always did</p>
+                <p class="fragment hl-red">... I am just doing it like I always did</p>
             </section>
 
-            <section id="broken-auth">
-                <section id="slide-08" class="chapter" data-background-image="./img/bgs/broken-lock.jpg"
-                    data-background-size="45%" data-background-position="80% 10%">
+            <!-- <section id="broken-auth"> -->
+            <section id="slide-08" class="chapter" data-background-image="./img/bgs/broken-lock.jpg"
+                data-background-size="45%" data-background-position="80% 10%">
 
-                    <h2>Broken Authentication</h2>
+                <h2>Broken Authentication</h2>
 
-                </section>
-
-                <section id="slide-09" data-autoslide="0">
-                    <h3>What does it mean?</h3>
-
-                    <p>when you ...</p>
-
-                    <ul>
-                        <li class="fragment">store passwords unencrypted</li>
-                        <li class="fragment">expose session IDs (in URLs?, to JS in Cookies?)</li>
-                        <li class="fragment">don't rotate session IDs after login (session fixation)</li>
-                        <li class="fragment">don't timeout/invalidate session IDs or use weak IDs</li>
-                        <li class="fragment">transmit authentication not on https</li>
-                    </ul>
-
-                </section>
-                <section id="slide-10">
-                    <h3>Mitigation</h3>
-
-                    <ul>
-                        <li class="fragment">sessionId storage: secure, httpOnly, sameSite and in cookie only</li>
-                        <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
-                        <li class="fragment">detect/prevent brute forcing</li>
-                        <li class="fragment">renew the sessionID after any privilege level change</li>
-                        <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
-                        <li class="fragment">provide a logout button</li>
-                        <li class="fragment">logging sessions lifecycle</li>
-                        <li class="fragment">btw: manage SessionIds just like any other user input</li>
-                    </ul>
-                </section>
             </section>
+
+            <section id="slide-9-xmp">
+                <div
+                    style="width:1212px;height:104px;background-image:url(img/sessionid.png);background-color: white;margin-bottom: 1rem;">
+                </div>
+                <br />
+                <pre><code class="php">
+                        public updatePassword() {
+                            $sql = "UPDATE customer SET password = ?, changed = NOW() WHERE id =  ?";
+                            $stmt = $db->prepare($sql);
+                            $stmt->bind_param('si', $_POST['password'], $this->customerId);
+                            $stmt->execute();
+                        }
+                    </code></pre>
+            </section>
+
+            <section id="slide-09" data-autoslide="0">
+                <h3>What does it mean?</h3>
+
+                <p>when you ...</p>
+
+                <ul>
+                    <li class="fragment">store passwords unencrypted/not hashed</li>
+                    <li class="fragment">expose session IDs (in URLs?, to JS in Cookies?)</li>
+                    <li class="fragment">don't rotate session IDs after login (session fixation)</li>
+                    <li class="fragment">don't timeout/invalidate session IDs or use weak IDs</li>
+                    <li class="fragment">transmit authentication not over https</li>
+                </ul>
+
+            </section>
+
+            <section id="slide-10">
+                <h3>Mitigation</h3>
+
+                <ul>
+                    <li class="fragment">sessionId storage: secure, httpOnly, sameSite and in cookie only</li>
+                    <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
+                    <li class="fragment">detect/prevent brute forcing</li>
+                    <li class="fragment">renew the sessionID after any privilege level change</li>
+                    <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
+                    <li class="fragment">provide a logout button</li>
+                    <li class="fragment">logging sessions lifecycle</li>
+                    <li class="fragment">btw: manage SessionIds just like any other user input</li>
+                </ul>
+            </section>
+            <!-- </section> -->
 
             <section id="data-exposure">
                 <section id="slide-11" class="chapter" data-background-image="img/bgs/treasure-chest.jpg"
@@ -400,10 +431,16 @@
                     <h2>What to do?</h2>
 
                     <ul>
-
                         <li class="fragment">use staging with configurations for each stage</li>
                         <li class="fragment">check regularily with security scanners</li>
                         <li class="fragment">code reviews</li>
+                        <li class="fragment">don't need it?
+                            <ul>
+                                <li class="fragment" data-autoslide="300">don't code it!</li>
+                                <li class="fragment" data-autoslide="300">don't install it!</li>
+                                <li class="fragment" data-autoslide="0">don't enable it!</li>
+                            </ul>
+                        </li>
                     </ul>
 
                 </section>
@@ -415,6 +452,23 @@
                 <section id="slide-17" class="chapter" data-background-image="img/bgs/shoplift.jpg">
                     <h2 style="background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem; width: 66%;margin-left:25%;">
                         Broken Access Control</h2>
+                </section>
+
+                <section id="slide-18-xmp">
+                    <pre><code class="php">                    public getProductIds() {
+                        return $this->productRepository->loadByUserId($this->userId);
+                    }
+                    print json_encode($productInfos); // send productids of the user
+
+                    // ... somewhere else ...
+                    public loadProductInfos(array $productIds) {
+                        $this->productRepository->allAttributes(userId);
+                    }
+                    // posting productid[]=123&productid[]=234&productid[]=345
+                    $productIds = $_POST['productid'];
+                    $productInfos = $productRepos->loadProductInfos($productIds); // get infos from db
+
+                    print json_encode($productInfos); </code></pre>
                 </section>
 
                 <section id="slide-18">
@@ -450,7 +504,7 @@
                     <h2>And now what?</h2>
 
                     <ul class="fragment">
-                        <li>authorization must be cheked <b>in every function call</b></li>
+                        <li>authorization must be checked <b>in every function call</b></li>
                         <li>use the builtin functionality of existing frameworks (check if they do!!)</li>
                         <li>e.g. use aspect oriented features to catch more functions at once</li>
                         <li>get help/code review exetnsively ...</li>
@@ -487,22 +541,37 @@
                         </li>
                     </ul>
 
-                    <div class="mock-form fragment">
-                        <div>Login Form</div>
-                        <span>
+                </section>
+
+                <section id="slide-06-xmp">
+
+                <pre><code class="sql">
+                    SELECT * FROM `users` WHERE username = ? AND PASSWORD = MD5(CONCAT(?, ?))
+                </code></pre>
+                    <div class="fragment mock-form">
+                        <div class="hl-green">Login Form</div>
+                        <div>
                             <label for="mock-search-1">user</label>
-                            <input type="search" name="search" id="mock-search-1" value="@bisnode.com" />
-                        </span>
+                            <input type="text" name="search" id="mock-search-1" value="some@one.com" />
+                        </div>
+                        <div>
+                            <label for="mock-search-1-2">password</label>
+                            <input type="password" name="search" id="mock-search-1-2" value="some@one.com" />
+                        </div>
                     </div>
 
                     <div class="mock-form fragment">
-                        <div>Login Form</div>
+                        <div class="hl-green">Login Form</div>
                         <span>
                             <label for="mock-search-2">user</label>
-                            <input type="search" name="search" id="mock-search-2" value="' OR 1 = 1 /*" />
+                            <input type="text" name="search" id="mock-search-2" value="' OR 1 = 1 --" />
                         </span>
                     </div>
 
+                    <p class="fragment">same without a browser</p>
+                    <pre class="fragment"><code class="css">
+                        http://wherever.net/api/search?query=%27+OR+1+%3D+1+--
+                    </code></pre>
 
                 </section>
 
@@ -510,7 +579,7 @@
                     <h2>what to do against it</h2>
 
                     <ul>
-                        <li class="fragment">input sanitazation (whitelisting instead of blacklisting)</li>
+                        <li class="fragment">input sanitation (whitelisting instead of blacklisting)</li>
                         <li class="fragment">escaping in SQL/HTML/...</li>
                         <li class="fragment">use Libraries functionality</li>
                         <li class="fragment">check your application with ZAP/Burp Suite ...</li>

@@ -14,122 +14,122 @@ services:
         default-ctf:
         internal-ctf:
 
-  juiceshop2:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-02
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3002:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop2:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-02
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3002:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop3:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-03
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3003:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop3:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-03
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3003:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop4:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-04
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3004:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop4:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-04
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3004:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop5:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-05
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3005:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop5:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-05
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3005:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop6:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-06
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3006:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop6:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-06
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3006:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop7:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-07
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3007:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop7:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-07
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3007:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop8:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-08
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3008:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop8:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-08
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3008:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop9:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-09
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3009:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop9:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-09
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3009:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
-  juiceshop10:
-    image: bkimminich/juice-shop
-    restart: unless-stopped
-    container_name: juice-10
-    environment: 
-      - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
-      - NODE_ENV=ctf
-    ports: 
-      - 3010:3000
-    networks:
-        default-ctf:
-        internal-ctf:
+  # juiceshop10:
+  #   image: bkimminich/juice-shop
+  #   restart: unless-stopped
+  #   container_name: juice-10
+  #   environment: 
+  #     - CTF_KEY=wEE2tZ760ui1cMmmAa97ow4Tg28dkJu36
+  #     - NODE_ENV=ctf
+  #   ports: 
+  #     - 3010:3000
+  #   networks:
+  #       default-ctf:
+  #       internal-ctf:
 
 # --------------------
 # CTF below here
