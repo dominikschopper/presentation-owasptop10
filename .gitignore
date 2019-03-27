@@ -24,3 +24,4 @@ docker/.data
 preparations
 docker/OWASP_Juice_Shop*.zip
 proposed schedule.pdf
+.vscode/
