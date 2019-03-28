@@ -75,6 +75,7 @@
       background-color: white;
       margin-bottom: 1rem;
     }
+
     .reveal pre code {
       max-height: 75%;
     }
@@ -211,8 +212,8 @@
                 it</span></li>
             <li>Using a database <span class="fragment hl-red" data-autoslide="1">... and not updating
                 it</span></li>
-            <li>Using anything you did not code yourself <span class="fragment hl-red"
-                data-autoslide="0">... and not updating it</span></li>
+            <li>Using anything you did not code yourself <span class="fragment hl-red" data-autoslide="0">... and not
+                updating it</span></li>
           </ul>
         </section>
 
@@ -301,8 +302,8 @@
       <!-- /easy wins -->
 
       <!-- bad habits -->
-      <section class="chapter" data-background-image="img/bgs/lazy-programmer.webp"
-        data-background-position="90% 5%" data-background-size="30%">
+      <section class="chapter" data-background-image="img/bgs/lazy-programmer.webp" data-background-position="90% 5%"
+        data-background-size="30%">
 
         <h2>Group2: Bad habits?</h2>
 
@@ -483,27 +484,26 @@
         </section>
 
         <section id="slide-18">
-          <h3>What is it?</h3>
+          <h2>What is it?</h2>
 
-          <h4 class="fragment">Missing function level access control?</h4>
-          <span class="fragment">
+          <div class="fragment" style="text-align: left">
+            <h3 ">Insecure direct Object References</h3>
 
-            <p>Applications often do not protect all functions/rest endpoints.</p>
-
-            <p>
-              What should be available to an admin and not to a normal user is just
-              hidden and not properly checked if it as called by an admin.
-            </p>
-          </span>
-
-          <h4 class="fragment">Insecure direct Object References</h4>
-          <span class="fragment">
-
-            <p>
-              Database IDs (...) are used without further checks or abstraction
+            <p>Database IDs (...) are used without further checks or abstraction
               e.g. db ids in URLs (and you just count upwards)
             </p>
-          </span>
+          </div>
+
+          <div class=" fragment" style="text-align: left">
+              <h3>Missing function level access control?</h3>
+
+              <p>Applications often do not protect all functions/rest endpoints.</p>
+
+              <p>
+                What should be available to an admin and not to a normal user is just
+                hidden and not properly checked if it as called by an admin.
+              </p>
+          </div>
 
           <aside class="notes" data-markdown>
             - story holger accessing his ticket through url manipulation
@@ -512,7 +512,7 @@
         </section>
 
         <section id="slide-19">
-          <h2>And now what?</h2>
+          <h2>And now? WHat shall we do?</h2>
 
           <ul class="fragment">
             <li>authorization must be checked <b>in every function call</b></li>
@@ -556,9 +556,10 @@
 
         <section id="slide-06-xmp">
 
-          <pre><code class="sql">
-          SELECT * FROM `users` WHERE username = ? AND PASSWORD = MD5(CONCAT(?, ?))
-        </code></pre>
+          <pre><code class="sql">          SELECT * FROM `users` WHERE 
+            login = '${username}' 
+            AND 
+            pass = MD5(CONCAT('${salt}', '${password}')) </code></pre>
           <div class="fragment mock-form">
             <div class="hl-green">Login Form</div>
             <div>
@@ -579,11 +580,43 @@
             </span>
           </div>
 
-          <p class="fragment">same without a browser</p>
-          <pre class="fragment"><code class="css">
-            http://wherever.net/api/search?query=%27+OR+1+%3D+1+--
+          <pre class="fragment"><code class="css"> http://wherever.net/api/search?query=%27+OR+1+%3D+1+-- </code></pre>
+
+        </section>
+
+        <section id="slide-06-ldap-xmp">
+
+          <div class="fragment mock-form">
+            <div class="hl-green">Login Form</div>
+            <div>
+              <label for="mock-search-1">user</label>
+              <input type="text" name="search" id="mock-search-1" value="admin" />
+            </div>
+            <div>
+              <label for="mock-search-1-2">password</label>
+              <input type="password" name="search" id="mock-search-1-2" value="s3cr3t" />
+            </div>
+          </div>
+
+          <pre class="fragment"><code class="ldap">
+              (&amp;(USER=admin)(PASSWORD=s3cr3t))
           </code></pre>
 
+          <div class="mock-form fragment">
+            <div class="hl-green">Login Form</div>
+            <span>
+              <label for="mock-search-2">user</label>
+              <input type="text" name="search" id="mock-search-2" value="admin)(&)" />
+            </span>
+          </div>
+
+          <pre class="fragment"><code class="ldap">
+              (&amp;(USER=admin)(&)(PASSWORD=doesntmatter))
+          </code></pre>
+
+          <p style="font-size:1rem;">
+            <a target="_blank" style="color:silver" href="https://www.blackhat.com/presentations/bh-europe-08/Alonso-Parada/Whitepaper/bh-eu-08-alonso-parada-WP.pdf">LDAP Injection Examples</a>
+          </p>
         </section>
 
         <section id="slide-07">
@@ -717,8 +750,7 @@
             <div>Registration</div>
             <span>
               <label for="mock-search-4">Name</label>
-              <input type="search" name="search" id="mock-search-4"
-                value="dom <script>alert('X')</script>" />
+              <input type="search" name="search" id="mock-search-4" value="dom <script>alert('X')</script>" />
             </span>
           </div>
         </section>
