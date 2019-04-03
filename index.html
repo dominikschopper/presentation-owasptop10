@@ -79,6 +79,22 @@
     .reveal pre code {
       max-height: 75%;
     }
+
+    .icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background-repeat: no-repeat;
+      background-size: 1em 1em;
+    }
+
+    .icon-on-white {
+      background-color: white;
+    }
+
+    .icon-skull {
+      background-image: url("img/skull-22-32.png");
+    }
   </style>
 </head>
 
@@ -125,6 +141,13 @@
             <li>supports/manages projects</li>
           </ul>
 
+          <aside class="notes" data-markdown>
+            ### open web application security project
+            - non for profit
+            - other sites, but this is a **good** goto place for nearly any security based research
+            - examples and further links
+            - see the cheatsheets
+          </aside>
         </section>
 
         <section id="owasp-overview" class="numbered-list" data-autoslide="0">
@@ -245,27 +268,40 @@
         </section>
 
         <section id="slide-33-xmp">
-          <pre class="fragment"><code class="js">
-        try {
-          coLogin.auth(cred);
-        } catch (err) {
-          logger.warn('Ooops! Could not login');
-        }
-        </code></pre>
-          <pre class="fragment"><code class="perl">
+          <pre ><code class="js">
+          if (myLogin.auth(cred)) {
+            logger.warn('Ooops! Could not login');
+            return false;
+          }
+          </code></pre>
+          <pre ><code class="javascript">
+          coLogin.auth(cred))
+            .then((resp) => {
+              console.log('Logging in', cred);
+            })
+            .catch((errResp) => {
+              logger.error(
+                'AUTHENTICATION ERROR; user: "%s"; during STEP: "B"; (%s / %s)', 
+                cred.username,
+                errResp.message,
+                errResp.statusCode
+              );
+            });
+          </code></pre>
+          <pre ><code class="perl">
           dnbToolkitSearch(term) || warn 'Not found!';
-        </code></pre>
+          </code></pre>
         </section>
 
         <section id="slide-33">
           <h2>Logging? Sure we do that!</h2>
-
           <p>but ...</p>
 
           <ul>
             <li class="fragment">warnings and errors generate no or unclear log messages.</li>
+            <li class="fragment">communicate about what needs to be logged (with whoever monitors, ...)</li>
             <li class="fragment">failed (and successful) logins are not logged.</li>
-            <li class="fragment">suspicious activity in logfiles is not monitored</li>
+            <li class="fragment">suspicious activity in logfiles is <span class="hl-red">not monitored</span></li>
             <li class="fragment">logs are only stored locally.</li>
           </ul>
         </section>
@@ -275,34 +311,43 @@
 
           <ul class="fragment">
             <li>create logging rules in the team</li>
-            <li>make checking logging part of the code reviews</li>
+            <li>Code Reviews should check logging</li>
           </ul>
 
-          <span class="fragment">
+          <div class="fragment">
             <h4>Log this!</h4>
             <ul>
-              <li> login, authoriz. failures, input validation failures (add context &larr; analysis)</li>
+              <li> login, authoriz. failures, input validation failures</li>
+              <li>authentication activity, role changes</li>
               <li> easy to consume log format </li>
-              <li> &quot;important transactions&quot; should have an audit trail. </li>
-              <li> prevent tampering with logfiles (append-only database tables...) </li>
+              <li> &quot;important transactions&quot; should have an audit trail.</li>
+              <li> prevent tampering with logfiles</li>
               <li> monitoring and alerting should be defined. </li>
             </ul>
-          </span>
+          </div>
         </section>
         <section id="slide-34-2">
           <h2>Actions needed</h2>
 
           <ul>
-            <li class="fragment">push for implementing a "central" logging server for everything (ELK?)</li>
-            <li class="fragment">push for a central monitoring</li>
-            <li class="fragment">use a common logging library ...</li>
+            <li class="fragment">create a common logging library ... (communicate e.g. through developer advocates)</li>
+            <li class="fragment">use a "central" logging server for everything (ELK, Splunk?)</li>
+            <li class="fragment">support/push for a central monitoring</li>
+            <!-- @TODO: image? centralized logging and monitoring? -->
           </ul>
+
+          <aside class="notes">
+            - I dont want to code these things every time
+            - I need communication with devops/evangelists/other teams
+          </aside>
         </section>
       </section>
       <!-- /easy wins -->
 
       <!-- bad habits -->
-      <section class="chapter" data-background-image="img/bgs/lazy-programmer.webp" data-background-position="90% 5%"
+      <section class="chapter"
+        data-background-image="img/bgs/lazy-programmer.webp" 
+        data-background-position="90% 5%"
         data-background-size="30%">
 
         <h2>Group2: Bad habits?</h2>
@@ -313,15 +358,17 @@
       </section>
 
       <!-- <section id="broken-auth"> -->
-      <section id="slide-08" class="chapter" data-background-image="./img/bgs/broken-lock.jpg"
-        data-background-size="45%" data-background-position="80% 10%">
+      <section id="slide-08" class="chapter" 
+        data-background-image="./img/bgs/broken-lock.jpg"
+        data-background-size="45%"
+        data-background-position="80% 10%">
 
         <h2>Broken Authentication</h2>
 
       </section>
 
       <section id="slide-9-xmp">
-        <div id="url-image"></div>
+        <img src="img/sessionid.png" alt="exposed sessionid">
         <br />
         <pre><code class="php">
           public updatePassword() {
@@ -331,6 +378,21 @@
             $stmt->execute();
           }
         </code></pre>
+
+        <aside class="notes" data-markdown>
+          **url sessionids**
+
+          - logging exposes them
+          - referrer exposes them
+
+          **unencrypted passwords**
+
+          - in db
+          - in a textfile on my pc
+          - in the wiki
+
+          jimmy telling about the passwords.jpeg
+        </aside>
       </section>
 
       <section id="slide-09" data-autoslide="0">
@@ -352,26 +414,34 @@
         <h3>Mitigation</h3>
 
         <ul>
-          <li class="fragment">sessionId storage: secure, httpOnly, sameSite and in cookie only</li>
+          <li class="fragment">sessionId in cookies, but: 
+            <span class="hl-green fragment">secure,</span>
+            <span class="hl-green fragment">httpOnly,</span>
+            <span class="hl-green fragment">sameSite</span>  
+          </li>
           <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
           <li class="fragment">detect/prevent brute forcing</li>
           <li class="fragment">renew the sessionID after any privilege level change</li>
           <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
           <li class="fragment">provide a logout button</li>
-          <li class="fragment">logging sessions lifecycle</li>
-          <li class="fragment">btw: manage SessionIds just like any other user input</li>
+          <li class="fragment">
+            btw: manage sessionIds are user input
+            <span class="hl-red fragment">don't trust user input <span class="icon icon-skull icon-on-white"></span> </span>
+          </li>
         </ul>
       </section>
       <!-- </section> -->
 
       <section id="data-exposure">
-        <section id="slide-11" class="chapter" data-background-image="img/bgs/treasure-chest.jpg"
-          data-background-size="40%" data-background-position="90% 90%">
+        <section id="slide-11" class="chapter"
+          data-background-image="img/bgs/treasure-chest.jpg"
+          data-background-size="40%"
+          data-background-position="90% 90%">
           <h2>Sensitive Data Exposure</h2>
         </section>
 
         <section id="slide-12">
-          <h2>What data exposed to ...?</h2>
+          <h2>What is sensitive data to be exposed?</h2>
 
           <ul>
             <li class="fragment">Usernames (or emails, passwords, ...)</li>
@@ -383,8 +453,9 @@
           </ul>
 
           <aside class="notes" data-markdown>
-            - even hashed passwords can be retrieved with rainbow tables [Rainbow
-            Tables](https://crackstation.net/)
+            - even hashed passwords can be retrieved with rainbow tables [Rainbow Tables](https://crackstation.net/)
+            - or just enter a password hash into google
+            - story about me zipping project into webroot up when doing a hotfix
           </aside>
         </section>
 
@@ -395,13 +466,12 @@
 
           <ul>
             <li class="fragment">TLS encrypt connections</li>
-            <li class="fragment">webroot ... <u>must not</u> contain backups, logs, ...</li>
+            <li class="fragment">webroot ... <u class="hl-red">must not</u> contain backups, logs, ...</li>
             <li class="fragment">hash passwords</li>
             <li class="fragment">protect sessions (app &amp; webserver cfg)</li>
             <li class="fragment">especially Credit Card/Banking Data - don't store it (yourself)</li>
-            <li class="fragment">scan with OWASP Zed Attack Proxy, Nikto, W3AF, ... </li>
-            <li class="fragment">scan regularily, before each deploy and on PROD</li>
-
+            <li class="fragment">scan with OWASP Zed Attack Proxy, Nikto, OpenVAS ... </li>
+            <li class="fragment">scan regularily, before each deploy (hard) and on PROD (softer)</li>
           </ul>
         </section>
       </section>
@@ -759,7 +829,7 @@
         <section id="slide-25">
           <h2>What can be done?</h2>
 
-          <img src="img/kirk-esacpes.jpg" style="display:block; width:28%; margin: 0.5rem auto;" />
+          <img src="img/kirk-esacpes.jpg" style="display:block; width:20%; margin: 0.5rem auto;" />
 
           <ul>
             <li class="fragment" data-autoslide="1000">Escape! Escape! Escape!!!
@@ -768,6 +838,7 @@
             <li class="fragment">Get help from static code analysis, like Fisheye/Crucible, Sonar, ...</li>
             <li class="fragment">don't use innerHTML</li>
             <li class="fragment">NG: use DomSanitizer, dont bypassSecurity</li>
+            <li>use CSP Headers against it (Helmet, Spring Sec. ...) </li>
           </ul>
 
           <aside class="notes" data-markdown>
@@ -822,12 +893,12 @@
       </section>
 
       <section id="servers">
-        <h3 style="text-transform: lowercase">CTF Server: http://10.0.0.1</h3>
-        <h3 style="text-transform: lowercase">Guest Wifi: http://10.0.0.1:8088</h3>
+        <h3 style="text-transform: lowercase">CTF Server: http://10.0.0.1:8088/</h3>
+        <h3 style="text-transform: lowercase">Guest Wifi: http://10.0.0.1:8088/</h3>
         <hr/>
-        <h3 style="text-transform: lowercase">Team1: http://10.0.0.1:3001</h3>
-        <h3 style="text-transform: lowercase">Team2: http://10.0.0.1:3002</h3>
-        <h3 style="text-transform: lowercase">Team3: http://10.0.0.1:3003</h3>
+        <h3 style="text-transform: lowercase">Team1: http://10.0.0.1:3001/</h3>
+        <h3 style="text-transform: lowercase">Team2: http://10.0.0.1:3002/</h3>
+        <h3 style="text-transform: lowercase">Team3: http://10.0.0.1:3003/</h3>
       </section>
     </div>
   </div>
