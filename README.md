@@ -1,5 +1,7 @@
 # OWASP Top 10
 
-small presentation about the OWASP Top10
+Small presentation about the OWASP Top10. (Uses [reveal.js](https://github.com/hakimel/reveal.js))
 
-target audience developers
+If you want to see the speakers notes press `[s]`
+
+target audience developers, preparation for a CTF with a hackable shop
