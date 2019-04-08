@@ -797,16 +797,6 @@
           <h2>What is XSS? <a class="fragment" target="_blank" href="https://youtu.be/gaLtI0s06hI">This is</a>
           </h2>
 
-          <p class="fragment">
-            if someone can send data that is not from the application, but the client (browser)
-            will use it as if
-          </p>
-
-        </section>
-
-        <section id="slide-24-2">
-          <h3>examples of XSS</h3>
-
           <div class="mock-form fragment">
             <div>Search Form</div>
             <span>
@@ -824,6 +814,28 @@
               <input type="search" name="search" id="mock-search-4" value="dom <script>alert('X')</script>" />
             </span>
           </div>
+
+        </section>
+
+        <section id="slide-24-2">
+          <h3>Definition of XSS</h3>
+
+          <p>
+            if someone can send data (js) that is not from the application to the client (browser)
+            and the client (browser) will use it as if it is from the application
+          </p>
+
+          <ul class="fragment">
+            <li>
+              stored XSS (JS Code gets stored in DB and gets send to the browser)
+            </li>
+            <li>
+              reflected (JS code gets send to the server and gets sent back top the browser w.out being stored)
+            </li>
+            <li>
+              DOM based (JS is executed directly in the browser)
+            </li>
+          </ul>
         </section>
 
 
@@ -896,13 +908,13 @@
       <section id="servers">
         <h3 style="text-transform: lowercase">CTF Server: http://my-ip:8088/</h3>
         <hr/>
-        <h3 style="text-transform: lowercase">Team1: http://poland-juice-01.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team2: http://poland-juice-02.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team3: http://poland-juice-03.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team4: http://poland-juice-04.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team5: http://poland-juice-05.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team6: http://poland-juice-06.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team7: http://poland-juice-07.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team1: http://poland-jshop-01.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team2: http://poland-jshop-02.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team3: http://poland-jshop-03.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team4: http://poland-jshop-04.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team5: http://poland-jshop-05.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team6: http://poland-jshop-06.herokuapp.com/</h3>
+        <h3 style="text-transform: lowercase">Team7: http://poland-jshop-07.herokuapp.com/</h3>
       </section>
     </div>
   </div>
