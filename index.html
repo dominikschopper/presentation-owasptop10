@@ -1,965 +1,107 @@
 <!doctype html>
-<html>
+<html lang="de">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>reveal.js - Barebones</title>
+    <link rel="stylesheet" href="./css/reveal.css">
 
-  <title>OWASP Top10 (v2017)</title>
+    <!-- cofinpro styling -->
+    <link rel="stylesheet" href="./css/cofinpro.css" id="theme">
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-  <link rel="stylesheet" href="css/reveal.css">
-  <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="shortcut icon" type="image/png" href="./favicon-32x32.png">
+    <style>
+        img {
+            display: block;
+            width: 100%;
+        }
 
-  <link rel="stylesheet" href="./css/layout.css">
-  <link rel="stylesheet" href="./css/bisnode-defaults.css">
+        .reveal section {
+            font-size: 0.75em;
+        }
 
-  <!-- Theme used for syntax highlighting of code -->
-  <link rel="stylesheet" href="lib/css/zenburn.css">
+        .reveal section p {
+            font-size: 0.666em;
+        }
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
+        .reveal section .aleft {
+            text-align: left;
+            padding: 0 2ch;
+        }
 
-  <style>
-    .reveal .mock-form {
-      width: 50%;
-      padding: 1rem 2rem;
-      margin: 1rem auto;
-      background-color: rgba(255, 255, 255, 0.9);
-      text-align: left;
-    }
-
-    .mock-form label {
-      display: inline-block;
-      margin: 1rem 2rem 1rem 0;
-      color: #323232;
-      width: 33%;
-    }
-
-    .mock-form input {
-      background-color: white;
-      border: 1px solid white;
-      display: inline-block;
-      line-height: 1.75rem;
-      font-size: 1.5rem;
-      padding: 0.75rem 1rem;
-      margin-left: 2rem;
-      border: 1px solid black;
-    }
-
-    textarea.code {
-      display: block;
-      width: 100%;
-      border: none;
-      background: transparent;
-      overflow: visible;
-      color: silver;
-      background: #323232;
-      padding: 0.75rem 1.5rem;
-      height: 2.5rem;
-      line-height: 2rem;
-      font-size: 2rem;
-      color: #d59e38;
-    }
-
-    #url-image {
-      width: 1212px;
-      height: 104px;
-      background-image: url(img/sessionid.png);
-      background-color: white;
-      margin-bottom: 1rem;
-    }
-
-    .reveal pre code {
-      max-height: 75%;
-    }
-
-    .icon {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      background-repeat: no-repeat;
-      background-size: 1em 1em;
-    }
-
-    .icon-on-white {
-      background-color: white;
-    }
-
-    .icon-skull {
-      background-image: url("img/skull-22-32.png");
-    }
-  </style>
+        .reveal section .aright {
+            text-align: right;
+            padding: 0 2ch;
+        }
+    </style>
+    <style>
+        .version-label {
+            position: absolute;
+            top: 0;
+            right: 14%;
+            transform: rotate(28deg);
+            background: rgb(170 170 170 / 0.3);
+            padding: 4px 8px;
+            border-radius: 16%;
+            border: 1px solid red;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="reveal">
-    <div class="slides">
-      <section id="title" class="chapter" data-background-image="img/bgs/halloween-face.jpg"
-        data-background-position="95% 5%">
-        <h1 class="">OWASP Top10</h1>
-        <h3 class="hl-red">developers worst nightmare???</h3>
 
-        <aside class="notes">
-          - i am a developer, not a sec specialist
-          - security is too important to leave it to the specialists
-          - i am not saying I always do all of the things I am stating here
-          - gdpr made it come forward, but I started this before that
+    <div class="reveal">
+        <div class="slides">
 
-          **but i try** - **very hard to do that**
-        </aside>
-      </section>
+            <section data-background-image="/images/everything-is-broken.jpg">
+                <hgroup class="bg-red-75" style="position:relative">
+                    <h1 class="lightblue">OWASP Top 10</h1>
+                    <p class="lightblue" >everything <strong>is</strong> broken ... <span class="fragment lightpink">on the internetz</span></p>
+                    <p class="yellow version-label">v2021</p>
+                </hgroup>
+            </section>
 
-      <section class="slidegroup-intro">
-        <section id="slide-01" class="chapter" data-background-image="img/bgs/european_wasp_transp_bg.png"
-          data-background-size="40%" data-background-position="90% 25%" data-autoslide="2000">
-          <h2 class="hl-green">OWASP</h2>
 
-          <p class="fragment" data-autoslide="1500">owa...hhht???</p>
+            <section> <!-- intro -->
 
-          <blockquote class="fragment" data-autoslide="0">
-            OWASP is an international organization [...]. OWASP is an open community
-            dedicated to enabling organizations to conceive, develop, acquire, operate,
-            and maintain applications that can be trusted.
-            <legend>website of owasp:
-              <a target="_blank"
-                href="https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project#The_OWASP_Foundation">
-                owasp.org
-              </a>
-            </legend>
-          </blockquote>
+                <section>
+                    intermezzo (about me, about cofinpro, about ...) toc?
+                </section>
 
-          <ul class="fragment" data-autoslide="0">
-            <li>non for profit since 2001</li>
-            <li>all things security related</li>
-            <li>supports/manages projects</li>
-          </ul>
 
-          <aside class="notes" data-markdown>
-            ### open web application security project
+            </section> <!-- /intro -->
 
-            - non for profit
-            - other sites, but this is a **good** goto place for nearly any security based research
-            - examples and further links
-            - see the cheatsheets
-          </aside>
-        </section>
 
-        <section id="owasp-overview" class="numbered-list" data-autoslide="0">
-          <h2>OWASP Top10</h2>
-          <p class="fragment fade-out">a list of widespread vulnerabilities</p>
-          <div class="row-with-cols">
-            <ol class="col-1-2">
-              <li data-autoslide="500" class="fragment">
-                Injection (SQL, LDAP, Shell...)
-              </li>
-              <li data-autoslide="500" class="fragment">
-                Broken Authentication
-              </li>
-              <li data-autoslide="500" class="fragment">
-                Sensitive Data Exposure
-              </li>
-              <li data-autoslide="500" class="fragment">
-                XML External Entities (XXE)
-              </li>
-              <li data-autoslide="500" class="fragment" style="line-height:1rem;">
-                Broken Access Control<br />
-                <span style="font-size:1rem;color:grey;">
-                  v2013: Dir. Obj. Ref + Func Level Access Ctrl.
-                </span>
-              </li>
-            </ol>
-            <ol class="col-1-2" start="6">
-              <li data-autoslide="500" class="fragment">
-                Security Misconfiguration
-              </li>
-              <li data-autoslide="500" class="fragment" style="line-height:1rem;">
-                XSS (Cross Site Scripting)
-              </li>
-              <li data-autoslide="500" class="fragment">
-                Insecure Deserialization
-              </li>
-              <li data-autoslide="500" class="fragment">
-                Using Components with KnownVulnerabilities
-              </li>
-              <li data-autoslide="0" class="fragment">
-                Insufficient Logging &amp; Monitoring
-              </li>
-            </ol>
-          </div>
-        </section>
+            <section> <!-- o10 overview -->
+                <section data-markdown="content/overview/o-what.md"></section>
+                <section data-markdown="content/overview/owasp-top10.md"></section>
+            </section> <!-- /o10 overview -->
 
-      </section>
 
-      <!-- easy wins -->
-      <section class="chapter" data-background-image="img/bgs/minions-agreeing.jpg">
-
-        <span style="display:inline-block;background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem;">
-          <h2>Group1: Easy Wins</h2>
-
-          <p>stuff we either already do or easily agree on we should be doing!!</p>
-
-          <ul class="fragment hl-green">
-            <li>like eat healthy</li>
-            <li>do more sports</li>
-            <li>do more for the environment ...</li>
-          </ul>
-        </span>
-
-        <aside class="notes" data-markdown>
-          I wanted to group stuff
-
-          first group is pretty clear to everybody ... and still it gets forgotten/left out ...
-        </aside>
-      </section>
-
-      <section id="known-vulnerabs">
-        <section id="slide-29" class="chapter" data-background-image="img/bgs/no-updates.jpeg"
-          data-background-position="90% 90%" data-background-size="30%">
-          <h2>Using Components Known vulnerabilities</h2>
-        </section>
-
-        <section id="slide-30" data-autoslide="0">
-          <h2>Who would do that?? And why??</h2>
-          <ul class="fragment">
-            <li>Using a framework <span class="fragment hl-red" data-autoslide="1">... and not updating
-                it</span></li>
-            <li>Using a library <span class="fragment hl-red" data-autoslide="1">... and not updating
-                it</span></li>
-            <li>Using a programm <span class="fragment hl-red" data-autoslide="1">... and not updating
-                it</span></li>
-            <li>Using a database <span class="fragment hl-red" data-autoslide="1">... and not updating
-                it</span></li>
-            <li>Using anything you did not code yourself <span class="fragment hl-red" data-autoslide="0">... and not
-                updating it</span></li>
-          </ul>
-        </section>
-
-        <section id="slide-31">
-          <h2>What to do?</h2>
-
-          <ul class="fragment">
-            <li>Keep an inventory, a list or track anyhow which libraries and external code or programms
-              you
-              use</li>
-            <li>Subscribe to mailing lists, that inform you about vulnerabilities.</li>
-            <li>Search in the CVE Database (Common Vulnerabilities and Exposures)</li>
-          </ul>
-
-          <h4 class="fragment">Use tools like</h4>
-
-          <ul class="fragment">
-            <li>NSP (Node Security Project) / Snyk</li>
-            <li>OWASP Dependency Check</li>
-          </ul>
-
-        </section>
-      </section>
-
-      <section id="insuff-logging">
-        <section id="slide-32" class="chapter" data-background-image="img/bgs/pickpocket.jpg"
-          data-background-position="95% 95%" data-background-size="30%">
-          <h2>Insufficent Logging &amp; Monitoring</h2>
-        </section>
-
-        <section id="slide-33-xmp">
-          <pre ><code class="js">
-          if (myLogin.auth(cred)) {
-            logger.warn('Ooops! Could not login');
-            return false;
-          }
-          </code></pre>
-          <pre ><code class="javascript">
-          coLogin.auth(cred))
-            .then((resp) => {
-              console.log('Logging in', cred);
-            })
-            .catch((errResp) => {
-              logger.error(
-                'AUTHENTICATION ERROR; user: "%s"; during STEP: "B"; (%s / %s)', 
-                cred.username,
-                errResp.message,
-                errResp.statusCode
-              );
-            });
-          </code></pre>
-          <pre ><code class="perl">
-          dnbToolkitSearch(term) || warn 'Not found!';
-          </code></pre>
-        </section>
-
-        <section id="slide-33">
-          <h2>Logging? Sure we do that!</h2>
-          <p>but ...</p>
-
-          <ul>
-            <li class="fragment">warnings and errors generate no or unclear log messages.</li>
-            <li class="fragment">communicate about what needs to be logged (with whoever monitors, ...)</li>
-            <li class="fragment">failed (and successful) logins are not logged.</li>
-            <li class="fragment">suspicious activity in logfiles is <span class="hl-red">not monitored</span></li>
-            <li class="fragment">logs are only stored locally.</li>
-          </ul>
-        </section>
-
-        <section id="slide-34">
-          <h2>Where are we?</h2>
-
-          <ul class="fragment">
-            <li>create logging rules in the team</li>
-            <li>Code Reviews should check logging</li>
-          </ul>
-
-          <div class="fragment">
-            <h4>Log this!</h4>
-            <ul>
-              <li> login, authoriz. failures, input validation failures</li>
-              <li>authentication activity, role changes</li>
-              <li> easy to consume log format </li>
-              <li> &quot;important transactions&quot; should have an audit trail.</li>
-              <li> prevent tampering with logfiles</li>
-              <li> monitoring and alerting should be defined. </li>
-            </ul>
-          </div>
-        </section>
-        <section id="slide-34-2">
-          <h2>Actions needed</h2>
-
-          <ul>
-            <li class="fragment">create a common logging library ... (communicate e.g. through developer advocates)</li>
-            <li class="fragment">use a "central" logging server for everything (ELK, Splunk?)</li>
-            <li class="fragment">support/push for a central monitoring</li>
-            <!-- @TODO: image? centralized logging and monitoring? -->
-          </ul>
-
-          <aside class="notes">
-            - I dont want to code these things every time
-            - I need communication with devops/evangelists/other teams
-          </aside>
-        </section>
-      </section>
-      <!-- /easy wins -->
-
-      <!-- bad habits -->
-      <section class="chapter"
-        data-background-image="img/bgs/lazy-programmer.webp" 
-        data-background-position="90% 5%"
-        data-background-size="30%">
-
-        <h2>Group2: Bad habits?</h2>
-
-        <p>I dont have them ...</p>
-
-        <p class="fragment hl-red">... I am just doing it like I always did</p>
-      </section>
-
-      <!-- <section id="broken-auth"> -->
-      <section id="slide-08" class="chapter" 
-        data-background-image="./img/bgs/broken-lock.jpg"
-        data-background-size="45%"
-        data-background-position="80% 10%">
-
-        <h2>Broken Authentication</h2>
-
-      </section>
-
-      <section id="slide-9-xmp">
-        <img src="img/sessionid.png" alt="exposed sessionid">
-        <br />
-        <pre><code class="php">
-          public updatePassword() {
-            $sql = "UPDATE customer SET password = ?, changed = NOW() WHERE id = ?";
-            $stmt = $db->prepare($sql);
-            $stmt->bind_param('si', $_POST['password'], $this->customerId);
-            $stmt->execute();
-          }
-        </code></pre>
-
-        <aside class="notes" data-markdown>
-          **url sessionids**
-
-          - logging exposes them
-          - referrer exposes them
-
-          **unencrypted passwords**
-
-          - in db
-          - in a textfile on my pc
-          - in the wiki
-
-          jimmy telling about the passwords.jpeg
-        </aside>
-      </section>
-
-      <section id="slide-09" data-autoslide="0">
-        <h3>What does it mean?</h3>
-
-        <p>when you ...</p>
-
-        <ul>
-          <li class="fragment">store passwords unencrypted/not hashed</li>
-          <li class="fragment">expose session IDs (in URLs?, to JS in Cookies?)</li>
-          <li class="fragment">don't rotate session IDs after login (session fixation)</li>
-          <li class="fragment">don't timeout/invalidate session IDs or use weak IDs</li>
-          <li class="fragment">transmit authentication not over https</li>
-        </ul>
-
-      </section>
-
-      <section id="slide-10">
-        <h3>Mitigation</h3>
-
-        <ul>
-          <li class="fragment">sessionId in cookies, but: 
-            <span class="hl-green fragment">secure,</span>
-            <span class="hl-green fragment">httpOnly,</span>
-            <span class="hl-green fragment">sameSite</span>  
-          </li>
-          <li class="fragment">use known and tested flows (OAuth, OpenID, ...)</li>
-          <li class="fragment">detect/prevent brute forcing</li>
-          <li class="fragment">renew the sessionID after any privilege level change</li>
-          <li class="fragment">set a short session timeout (idle, absolute, renewal)</li>
-          <li class="fragment">provide a logout button</li>
-          <li class="fragment">
-            btw: manage sessionIds are user input
-            <span class="hl-red fragment">don't trust user input <span class="icon icon-skull icon-on-white"></span> </span>
-          </li>
-        </ul>
-      </section>
-      <!-- </section> -->
-
-      <section id="data-exposure">
-        <section id="slide-11" class="chapter"
-          data-background-image="img/bgs/treasure-chest.jpg"
-          data-background-size="40%"
-          data-background-position="90% 90%">
-          <h2>Sensitive Data Exposure</h2>
-        </section>
-
-        <section id="slide-12">
-          <h2>What is sensitive data to be exposed?</h2>
-
-          <ul>
-            <li class="fragment">Usernames (or emails, passwords, ...)</li>
-            <li class="fragment">Creditcard, banking infos, ...</li>
-            <li class="fragment">Other systems hostnames, usernames, passwords</li>
-            <li class="fragment">Backup Files of the application</li>
-            <li class="fragment">Logfiles, System output, ...</li>
-            <li class="fragment">Session IDs, Tokens ...</li>
-          </ul>
-
-          <aside class="notes" data-markdown>
-            - even hashed passwords can be retrieved with rainbow tables [Rainbow Tables](https://crackstation.net/)
-            - or just enter a password hash into google
-            - story about me zipping project into webroot up when doing a hotfix
-          </aside>
-        </section>
-
-        <section id="slide-13">
-          <h2>How to prevent this?</h2>
-
-          <p class="fragment" style="color:#d53868;text-align: center;">think before you store!</p>
-
-          <ul>
-            <li class="fragment">TLS encrypt connections</li>
-            <li class="fragment">webroot ... <u class="hl-red">must not</u> contain backups, logs, ...</li>
-            <li class="fragment">hash passwords</li>
-            <li class="fragment">protect sessions (app &amp; webserver cfg)</li>
-            <li class="fragment">especially Credit Card/Banking Data - don't store it (yourself)</li>
-            <li class="fragment">scan with OWASP Zed Attack Proxy, Nikto, OpenVAS ... </li>
-            <li class="fragment">scan regularily, before each deploy (hard) and on PROD (softer)</li>
-          </ul>
-        </section>
-      </section>
-
-      <section id="sec-misconfig">
-        <section id="slide-20" class="chapter" data-background-image="img/bgs/wile_coyote.jpg"
-          data-background-position="95% 5%" data-background-size="35%">
-          <h2 style="background-color: rgba(32, 32, 32, 0.75);padding: 1rem 2rem;">
-            Security
-            <br />Misconfiguration
-          </h2>
-        </section>
-
-        <section id="slide-21">
-          <h2>Why is that my problem??</h2>
-
-          <p>
-            thats admin stuff ... I am a developer, I don't have to do that
-            <span class="fragment">... but wait!!</span>
-          </p>
-
-
-
-          <ul>
-            <li class="fragment">
-              Error handling reveals stack traces or other overly informative error messages to users.
-              <span class="fragment hl-red">on Prod!</span>
-            </li>
-            <li class="fragment">
-              Unnecessary features are enabled or installed (default ports, services, pages, accounts,
-              passwords ...) <span class="fragment hl-red">on Prod!</span>
-            </li>
-          </ul>
-        </section>
-
-        <section id="slide-22">
-          <h2>What to do?</h2>
-
-          <ul>
-            <li class="fragment">use staging with configurations for each stage</li>
-            <li class="fragment">check regularily with security scanners</li>
-            <li class="fragment">code reviews</li>
-            <li class="fragment">don't need it?
-              <ul>
-                <li class="fragment" data-autoslide="300">don't code it!</li>
-                <li class="fragment" data-autoslide="300">don't install it!</li>
-                <li class="fragment" data-autoslide="0">don't enable it!</li>
-              </ul>
-            </li>
-          </ul>
-
-        </section>
-      </section>
-
-      <section id="broken-access">
-
-        <section id="slide-17" class="chapter" data-background-image="img/bgs/shoplift.jpg">
-          <h2 style="background-color:rgba(32, 32, 32, 0.8);padding: 1rem 2rem; width: 66%;margin-left:25%;">
-            Broken Access Control</h2>
-        </section>
-
-        <section id="slide-18-xmp">
-          <pre><code class="php">
-          /** loading a users stored products */
-          public getProductIdsByUser() {
-            return $this->productRepository->loadByUserId($this->userId);
-          }
-
-          /** loading details of a list of products */
-          public loadProductDetails(array $productIds) {
-            $this->productRepository->allAttributes($productIds);
-          }
-
-          // posting productid[]=123&productid[]=234&productid[]=345
-          // retrieving a users checked products
-          $productIds = $_POST['productid'];
-          // showing the user details of all products he checked
-          $productDetails = $productRepos->loadProductDetails($productIds);
-        </code></pre>
-        </section>
-
-        <section id="slide-18">
-          <h2>What is it?</h2>
-
-          <div class="fragment" style="text-align: left">
-            <h3 ">Insecure direct Object References</h3>
-
-            <p>Database IDs (...) are used without further checks or abstraction
-              e.g. db ids in URLs (and you just count upwards)
-            </p>
-          </div>
-
-          <div class=" fragment" style="text-align: left">
-              <h3>Missing function level access control?</h3>
-
-              <p>Applications often do not protect all functions/rest endpoints.</p>
-
-              <p>
-                What should be available to an admin and not to a normal user is just
-                hidden and not properly checked if it as called by an admin.
-              </p>
-          </div>
-
-          <aside class="notes" data-markdown>
-            - story holger accessing his ticket through url manipulation
-            - pretty common imho
-          </aside>
-        </section>
-
-        <section id="slide-19">
-          <h2>And now? WHat shall we do?</h2>
-
-          <ul class="fragment">
-            <li>authorization must be checked <b>in every function call</b></li>
-            <li>use the builtin functionality of existing frameworks (check if they do!!)</li>
-            <li>e.g. use aspect oriented features to catch more functions at once</li>
-            <li>get help/code review exetnsively ...</li>
-          </ul>
-        </section>
-      </section>
-      <!-- /bad habits -->
-
-      <!-- injections -->
-      <section id="injection">
-
-        <section class="chapter" id="injects-title" data-background-image="img/bgs/many-injections.jpg"
-          data-background-size="25%" data-background-position="90% 90%">
-          <h2>Group3: all kinds of injections</h2>
-        </section>
-
-        <section id="slide-05" class="chapter" data-background-image="./img/bgs/exploits_of_a_mom.png"
-          data-background-size="66.66666%" data-background-position="80% 10%">
-
-          <h3>Injection</h3>
-          <h4>SQL, NoSQL, OS/Shell &amp; LDAP injection</h4>
-        </section>
-
-        <section id="slide-06">
-          <h5>how does it work?</h5>
-
-          <ul>
-            <li>enter an SQL/LDAP/Shell command into a form (or send it to a service directly)</li>
-            <li class="fragment" data-fragment-index="3">
-              the command gets &quot;accidentally&quot; executed by the server
-            </li>
-            <li class="fragment" data-fragment-index="3">
-              you gain access, see/download/delete... stuff you should not
-            </li>
-          </ul>
-
-        </section>
-
-        <section id="slide-06-xmp">
-
-          <pre><code class="sql">          SELECT * FROM `users` WHERE 
-            login = '${username}' 
-            AND 
-            pass = MD5(CONCAT('${salt}', '${password}')) </code></pre>
-          <div class="fragment mock-form">
-            <div class="hl-green">Login Form</div>
-            <div>
-              <label for="mock-search-1">user</label>
-              <input type="text" name="search" id="mock-search-1" value="some@one.com" />
-            </div>
-            <div>
-              <label for="mock-search-1-2">password</label>
-              <input type="password" name="search" id="mock-search-1-2" value="some@one.com" />
-            </div>
-          </div>
-
-          <div class="mock-form fragment">
-            <div class="hl-green">Login Form</div>
-            <span>
-              <label for="mock-search-2">user</label>
-              <input type="text" name="search" id="mock-search-2" value="' OR 1 = 1 --" />
-            </span>
-          </div>
-
-          <pre class="fragment"><code class="css"> http://wherever.net/api/search?query=%27+OR+1+%3D+1+-- </code></pre>
-
-        </section>
-
-        <section id="slide-06-ldap-xmp">
-
-          <div class="fragment mock-form">
-            <div class="hl-green">Login Form</div>
-            <div>
-              <label for="mock-search-1">user</label>
-              <input type="text" name="search" id="mock-search-1" value="admin" />
-            </div>
-            <div>
-              <label for="mock-search-1-2">password</label>
-              <input type="password" name="search" id="mock-search-1-2" value="s3cr3t" />
-            </div>
-          </div>
-
-          <pre class="fragment"><code class="ldap">
-              (&amp;(USER=admin)(PASSWORD=s3cr3t))
-          </code></pre>
-
-          <div class="mock-form fragment">
-            <div class="hl-green">Login Form</div>
-            <span>
-              <label for="mock-search-2">user</label>
-              <input type="text" name="search" id="mock-search-2" value="admin)(&)" />
-            </span>
-          </div>
-
-          <pre class="fragment"><code class="ldap">
-              (&amp;(USER=admin)(&)(PASSWORD=doesntmatter))
-          </code></pre>
-
-          <p style="font-size:1rem;">
-            <a target="_blank" style="color:silver" href="https://www.blackhat.com/presentations/bh-europe-08/Alonso-Parada/Whitepaper/bh-eu-08-alonso-parada-WP.pdf">LDAP Injection Examples</a>
-          </p>
-        </section>
-
-        <section id="slide-07">
-          <h2>what to do against it</h2>
-
-          <ul>
-            <li class="fragment">input sanitation (whitelisting instead of blacklisting)</li>
-            <li class="fragment">escaping in SQL/HTML/...</li>
-            <li class="fragment">use Libraries functionality (symfony, django, hibernate, ...)</li>
-            <li class="fragment">check your application with ZAP/Burp Suite ...</li>
-          </ul>
-
-          <p class="fragment hl-red">Use context aware sanitation and escaping</p>
-        </section>
-      </section>
-
-      <section id="xxe">
-        <section id="slide-14" class="chapter">
-          <h2>XXE - XML external entities</h2>
-        </section>
-
-        <section id="slide-15-xmp">
-          <pre><code class="xml">
-          &lt;?xml version="1.0" encoding="ISO-8859-1"?>&lt;!DOCTYPE foo [
-          &lt;!ELEMENT foo ANY >
-          &lt;!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-          &lt;foo>&xxe;&lt;/foo>
-          </code></pre>
-
-          <pre><code class="xml">
-          &lt;?xml version="1.0" encoding="ISO-8859-1"?>&lt;!DOCTYPE foo [
-          &lt;!ELEMENT foo ANY >
-          &lt;!ENTITY xxe SYSTEM "file:///dev/random" >]>
-          &lt;foo>&xxe;&lt;/foo>
-          </code></pre>
-        </section>
-
-        <section id="slide-15">
-          <h2>Where is this a problem?</h2>
-          <ul>
-            <li class="fragment">XML files get processed by the application</li>
-            <li class="fragment">User Input gets written into XML (SOAP?)</li>
-            <li class="fragment">SAML is used (XML based auth protocol for SSO)</li>
-          </ul>
-        </section>
-
-        <section id="slide-16">
-          <h2>What to do?</h2>
-
-          <ul class="fragment">
-            <li>switch off XXE &rarr; <a target="_blank"
-                href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.md">XXE
-                Prevention</a></li>
-            <li>input sanitazation (whitelisting instead of blacklisting)</li>
-            <li>XML Validation</li>
-            <li>escape all user inputs</li>
-            <li>to enforce: have regular code reviews</li>
-            <li>check your application with ZAP/Burp Suite ...</li>
-          </ul>
-          <p class="fragment hl-red">Use context aware sanitation and escaping</p>
-        </section>
-      </section>
-
-      <section id="insec-serialization">
-        <section id="slide-26" class="chapter">
-          <h2>Insecure Deserialization</h2>
-        </section>
-
-        <section id="slide-27">
-          <h2>Why is this a problem?</h2>
-
-          <p>Anytime we use user input in a serialized object or expose serialized data to the user (auth
-            tokens)</p>
-
-          <ul class="fragment">
-            <li>HTTP cookies, HTML form parameters, API authentication tokens</li>
-            <li>Caching serialized objects (that contain user input)</li>
-            <li>Transferring Objects to other processes or over the wire (RPC/IPC)</li>
-          </ul>
-
-        </section>
-
-        <section id="slide-28">
-          <h2>What to do about this?</h2>
-
-          <ul>
-            <li>use integrity checks, sign serialized data and check the signature</li>
-            <li>logging and monitoring deserialization exceptions</li>
-            <li>strict type checking on deserialization (not enough - has already been circumvented) </li>
-            <li>deserialize in low privilege environments (when possible)</li>
-            <li>check your application with ZAP/Burp Suite ...</li>
-          </ul>
-          <p class="fragment hl-red">Use context aware sanitation and escaping</p>
-        </section>
-      </section>
-      <!-- /injections -->
-
-      <section id="browser-attacks">
-        <h2>Last Group: Attacking the Client</h2>
-      </section>
-      <section id="xss">
-        <section id="slide-23" class="chapter">
-          <h2>XSS &rarr; Cross Site Scripting</h2>
-        </section>
-
-        <section id="slide-24">
-          <h2>What is XSS? <a class="fragment" target="_blank" href="https://youtu.be/gaLtI0s06hI">This is</a>
-          </h2>
-
-          <div class="mock-form fragment">
-            <div>Search Form</div>
-            <span>
-              <label for="mock-search-3">search</label>
-              <input type="search" name="search" id="mock-search-3" value="iphone" />
-            </span>
-            <div style="color:black">your result for <span class="hl-red">iphone</span></div>
-          </div>
-
-
-          <div class="mock-form fragment">
-            <div>Registration</div>
-            <span>
-              <label for="mock-search-4">Name</label>
-              <input type="search" name="search" id="mock-search-4" value="dom <script>alert('X')</script>" />
-            </span>
-          </div>
-
-        </section>
-
-        <section id="slide-24-2">
-          <h3>Definition of XSS</h3>
-
-          <p>
-            if someone can send data (js) that is not from the application to the client (browser)
-            and the client (browser) will use it as if it is from the application
-          </p>
-
-          <ul class="fragment">
-            <li>
-              stored XSS (JS Code gets stored in DB and gets send to the browser)
-            </li>
-            <li>
-              reflected (JS code gets send to the server and gets sent back top the browser w.out being stored)
-            </li>
-            <li>
-              DOM based (JS is executed directly in the browser)
-            </li>
-          </ul>
-        </section>
-
-
-        <section id="slide-25">
-          <h2>What can be done?</h2>
-
-          <img src="img/kirk-esacpes.jpg" style="display:block; width:20%; margin: 0.5rem auto;" />
-
-          <ul>
-            <li class="fragment" data-autoslide="1000">Escape! Escape! Escape!!!
-              <span class="fragment" data-autoslide="0">Context related escapes!!!!</span>
-            </li>
-            <li class="fragment">Get help from static code analysis, like Fisheye/Crucible, Sonar, ...</li>
-            <li class="fragment">don't use innerHTML</li>
-            <li class="fragment">NG: use DomSanitizer, dont bypassSecurity</li>
-            <li>use CSP Headers against it (Helmet, Spring Sec. ...) </li>
-          </ul>
-
-          <aside class="notes" data-markdown>
-            from can user input come from?
-            - dbs
-            - service endpoints
-            where does the user input show up?
-            - Textareas
-            - input values
-            - URL-Parameters
-            - css
-          </aside>
-        </section>
-      </section>
-
-      <section id="wrapup">
-        <section id="slide-35" class="chapter">
-          <h2>What else?</h2>
-
-          <aside class="notes" data-markdown>
-            what were you running into?
-
-            how did you solve that?
-          </aside>
-        </section>
-
-        <section id="slide-36">
-          <h2>My Proposals</h2>
-          <ul>
-            <li class="fragment">Code Reviews, Code Reviews, Code Reviews</li>
-            <li class="fragment">Define Standards</li>
-            <li class="fragment">Define your Workflows <b class="hl-green">with security in mind</b></li>
-            <li class="fragment">Stick to your workflows (each team member has to remind every other team
-              member)</li>
-            <li class="fragment">Say "No!" to time pressure</li>
-            <li class="fragment">Run automatted security tests as often as possible</li>
-          </ul>
-
-          <aside class="notes" data-markdown>
-            code reviews that
-            - look for escapes
-            - that look where user input is coming from
-            - if xxe is enabled
-          </aside>
-        </section>
-      </section>
-
-      <section id="thx">
-        <section id="last" class="chapter">
-          <h2>Thank you for your patience</h2>
-        </section>
-      </section>
-
-      <section id="servers">
-        <h3 style="text-transform: lowercase">CTF Server: http://my-ip:8088/</h3>
-        <hr/>
-        <h3 style="text-transform: lowercase">Team1: http://poland-jshop-01.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team2: http://poland-jshop-02.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team3: http://poland-jshop-03.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team4: http://poland-jshop-04.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team5: http://poland-jshop-05.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team6: http://poland-jshop-06.herokuapp.com/</h3>
-        <h3 style="text-transform: lowercase">Team7: http://poland-jshop-07.herokuapp.com/</h3>
-      </section>
+        </div>
     </div>
-  </div>
 
-  <script src="lib/js/head.min.js"></script>
-  <script src="js/reveal.js"></script>
+    <script src="./js/reveal.js"></script>
 
-  <script>
-    // More info about config & dependencies:
-    // - https://github.com/hakimel/reveal.js#configuration
-    // - https://github.com/hakimel/reveal.js#dependencies
-    Reveal.initialize({
+    <!-- used plugins -->
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
 
-      width: 1124,
-      height: 820,
-      progress: true,
-      fragmentInURL: true,
-      controlsTutorial: false,
-      controlsLayout: 'edges',
-      slideNumber: true,
-      // parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg",
-      history: true,
-      loop: false,
-      help: true, // false => for presentation
-      // showNotes: true, // false => for presentation
+    <!-- reveal config -->
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            showSlideNumber: 'all',// 'speaker',
+            hash: true,
+            loop: false,
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
 
-
-      dependencies: [{
-          src: 'plugin/markdown/marked.js'
-        },
-        {
-          src: 'plugin/markdown/markdown.js'
-        },
-        {
-          src: 'plugin/notes/notes.js',
-          async: true
-        },
-        {
-          src: 'plugin/highlight/highlight.js',
-          async: true,
-          callback: () => hljs.initHighlightingOnLoad()
-        }
-      ]
-    });
-  </script>
 </body>
 
 </html>
