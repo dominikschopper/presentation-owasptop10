@@ -1,0 +1,24 @@
+{
+  "name": "fun-with-the-shell-presentation",
+  "version": "0.1.0",
+  "description": "a presentation about linux / unix focussing on the terminal and the shell for internal use at cofinpro ag",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=9099",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cofinpro",
+    "unix",
+    "linux",
+    "shell",
+    "bash",
+    "zsh",
+    "training"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.1.0"
+  }
+}

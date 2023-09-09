@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>reveal.js - Barebones</title>
+    <link rel="stylesheet" href="./css/reveal.css">
+
+    <!-- cofinpro styling -->
+    <link rel="stylesheet" href="./css/cofinpro.css" id="theme">
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+    <link rel="shortcut icon" type="image/png" href="./favicon-32x32.png">
+    <style>
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        .reveal section {
+            font-size: 0.75em;
+        }
+
+        .reveal section p {
+            font-size: 0.666em;
+        }
+
+        .reveal section .aleft {
+            text-align: left;
+            padding: 0 2ch;
+        }
+
+        .reveal section .aright {
+            text-align: right;
+            padding: 0 2ch;
+        }
+    </style>
+    <style>
+        .version-label {
+            position: absolute;
+            top: 0;
+            right: 14%;
+            transform: rotate(28deg);
+            background: rgb(170 170 170 / 0.3);
+            padding: 4px 8px;
+            border-radius: 16%;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section data-background-image="/images/everything-is-broken.jpg">
+                <hgroup class="bg-red-75" style="position:relative">
+                    <h1 class="lightblue">OWASP Top 10</h1>
+                    <p class="lightblue" >everything <strong>is</strong> broken ... <span class="fragment lightpink">on the internetz</span></p>
+                    <p class="yellow version-label">v2021</p>
+                </hgroup>
+            </section>
+
+
+            <section> <!-- intro -->
+
+                <section>
+                    intermezzo (about me, about cofinpro, about ...) toc?
+                </section>
+
+
+            </section> <!-- /intro -->
+
+
+            <section> <!-- o10 overview -->
+                <section data-markdown="content/overview/o-what.md"></section>
+                <section data-markdown="content/overview/owasp-top10.md"></section>
+            </section> <!-- /o10 overview -->
+
+
+        </div>
+    </div>
+
+    <script src="./js/reveal.js"></script>
+
+    <!-- used plugins -->
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+
+    <!-- reveal config -->
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            showSlideNumber: 'all',// 'speaker',
+            hash: true,
+            loop: false,
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+
+</body>
+
+</html>
